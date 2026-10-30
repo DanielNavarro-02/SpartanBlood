@@ -3,8 +3,8 @@ extends Camera3D
 @export var objetivo: Node3D
 @export var distancia = Vector3(0, 2, 12)
 @export var suavizado = 5.0
-@export var limite_min = Vector2(-3, -10)   # x y z mínimas del foco
-@export var limite_max = Vector2(3, 10)     # x y z máximas del foco
+@export var limite_min = Vector2(-21, -10)   # x y z mínimas del foco
+@export var limite_max = Vector2(21, 10)     # x y z máximas del foco
 
 func _ready():
 	top_level = true
