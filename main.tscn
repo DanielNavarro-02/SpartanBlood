@@ -1,0 +1,98 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://personaje.gd" id="1_pj"]
+[ext_resource type="PackedScene" path="res://personaje/character-male-a.glb" id="2_modelo"]
+
+[sub_resource type="ProceduralSkyMaterial" id="CieloMat"]
+
+[sub_resource type="Sky" id="Cielo"]
+sky_material = SubResource("CieloMat")
+
+[sub_resource type="Environment" id="Entorno"]
+background_mode = 2
+sky = SubResource("Cielo")
+
+[sub_resource type="BoxMesh" id="PisoMalla"]
+size = Vector3(30, 1, 4)
+
+[sub_resource type="BoxShape3D" id="PisoForma"]
+size = Vector3(30, 1, 4)
+
+[sub_resource type="BoxMesh" id="PlatMalla"]
+size = Vector3(3, 0.4, 4)
+
+[sub_resource type="BoxShape3D" id="PlatForma"]
+size = Vector3(3, 0.4, 4)
+
+[sub_resource type="StandardMaterial3D" id="PlatMat"]
+albedo_color = Color(0.85, 0.55, 0.25, 1)
+
+[sub_resource type="CapsuleShape3D" id="Capsula"]
+radius = 0.35
+height = 1.75
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Entorno")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 6, 0)
+shadow_enabled = true
+
+[node name="Suelo" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Suelo"]
+mesh = SubResource("PisoMalla")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Suelo"]
+shape = SubResource("PisoForma")
+
+[node name="Plataformas" type="Node3D" parent="."]
+
+[node name="Plataforma1" type="StaticBody3D" parent="Plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0.4, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plataformas/Plataforma1"]
+mesh = SubResource("PlatMalla")
+surface_material_override/0 = SubResource("PlatMat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma1"]
+shape = SubResource("PlatForma")
+
+[node name="Plataforma2" type="StaticBody3D" parent="Plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.4, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plataformas/Plataforma2"]
+mesh = SubResource("PlatMalla")
+surface_material_override/0 = SubResource("PlatMat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma2"]
+shape = SubResource("PlatForma")
+
+[node name="Plataforma3" type="StaticBody3D" parent="Plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.9, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plataformas/Plataforma3"]
+mesh = SubResource("PlatMalla")
+surface_material_override/0 = SubResource("PlatMat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plataformas/Plataforma3"]
+shape = SubResource("PlatForma")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 12)
+projection = 1
+size = 10.0
+
+[node name="Personaje" type="CharacterBody3D" parent="."]
+axis_lock_linear_z = true
+script = ExtResource("1_pj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("Capsula")
+
+[node name="Modelo" parent="Personaje" instance=ExtResource("2_modelo")]
+transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)

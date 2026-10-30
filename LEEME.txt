@@ -1,0 +1,4 @@
+Inicio del juego 2.5D — plantilla para el juego del equipo (Corte 2).
+Mundo 3D visto de lado con cámara ortográfica: el personaje (Kenney, CC0) solo se mueve
+en X y salta en Y (el eje Z está bloqueado). Trae los enchufes multiplicador, empuje y accion
+y la prueba automática del Inspector. Escena: main.tscn.
