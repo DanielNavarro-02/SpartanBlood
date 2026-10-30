@@ -6,7 +6,7 @@ const RUIDO = [0.0, 2.0, 0.0]   # metros, en el mismo orden del enum
 @export var speed = 6.0
 @export var tiempo_arranque = 0.15
 @export var gravedad = 30.0
-@export var altura_salto = 2.0
+@export var altura_salto = 4.0
 @onready var anim = $Modelo/AnimationPlayer
 
 # Enchufes: otros scripts (las acciones del juego) cambian estas tres variables.
