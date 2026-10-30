@@ -1,9 +1,12 @@
 extends CharacterBody3D
 
+enum Estado { QUIETO, CAMINAR, AIRE }
+const RUIDO = [0.0, 2.0, 0.0]   # metros, en el mismo orden del enum
+
 @export var speed = 6.0
 @export var tiempo_arranque = 0.15
 @export var gravedad = 30.0
-@export var altura_salto = 4.0
+@export var altura_salto = 2.0
 @onready var anim = $Modelo/AnimationPlayer
 
 # Enchufes: otros scripts (las acciones del juego) cambian estas tres variables.
@@ -12,13 +15,25 @@ var empuje = Vector3.ZERO   # velocidad extra en m/s (dash, retroceso)
 var accion = ""             # animación de la acción; "" = ninguna
 var avance = 0.0
 
+var estado = Estado.QUIETO
+var ruido = 0.0
+var coyote = 0.0            # tiempo de gracia para saltar
+
 
 func _physics_process(delta):
-	if not is_on_floor():
+	# Gravedad y coyote
+	if is_on_floor():
+		coyote = 0.10
+	else:
+		coyote -= delta
 		velocity.y -= gravedad * delta
-	elif Input.is_action_just_pressed("saltar"):
-		velocity.y = sqrt(2 * gravedad * altura_salto)
 
+	# Salto (permitido mientras coyote > 0)
+	if Input.is_action_just_pressed("saltar") and coyote > 0:
+		velocity.y = sqrt(2 * gravedad * altura_salto)
+		coyote = 0.0   # evita saltar dos veces
+
+	# Movimiento horizontal con arranque y frenado
 	var lado = Input.get_axis("move_left", "move_right")
 	var paso = speed / tiempo_arranque * delta
 	avance = move_toward(avance, lado * speed * multiplicador, paso)
@@ -26,17 +41,39 @@ func _physics_process(delta):
 
 	if lado != 0:
 		rotation.y = -PI / 2 * sign(lado)   # mira hacia +X o hacia -X
-	if accion != "":
-		anim.play(accion)
-	elif not is_on_floor():
-		anim.play("jump" if velocity.y > 0 else "fall")
-	elif absf(avance) > 0.1:
-		anim.play("walk")
-	else:
-		anim.play("idle")
 
 	move_and_slide()
+
+	# Estado, ruido y animación
+	var antes = estado
+	estado = elegir_estado()
+	ruido = RUIDO[estado]
+	if estado != antes:
+		print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
+	animar()
 	_prueba()
+
+
+func elegir_estado():
+	if not is_on_floor():
+		return Estado.AIRE
+	if absf(velocity.x) < 0.1:
+		return Estado.QUIETO
+	return Estado.CAMINAR
+
+
+func animar():
+	if accion != "":
+		anim.play(accion)
+		return
+	match estado:
+		Estado.QUIETO:
+			anim.play("idle")
+		Estado.CAMINAR:
+			anim.play("walk")
+		Estado.AIRE:
+			anim.play("jump" if velocity.y > 0 else "fall")
+	
 
 
 # ---------------------------------------------------------------------------
