@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://87p8i78fwxev"]
+
+[ext_resource type="Material" uid="uid://dv0rt5h2ww7s0" path="res://piezas/material_roca.tres" id="1_x0075"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_l14ns"]
+size = Vector3(4, 5, 3)
+
+[node name="salida" type="StaticBody3D" unique_id=541705558]
+
+[node name="@MeshInstance3D@2" type="MeshInstance3D" parent="." unique_id=564168902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("1_x0075")
+mesh = SubResource("BoxMesh_l14ns")

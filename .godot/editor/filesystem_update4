@@ -1,3 +1,7 @@
-res://personaje.gd
 res://main.tscn
-res://camera_3d.gd
+res://fondos/ruinas_environment.tres
+res://piezas/material_roca.tres
+res://mapa.tscn
+res://piezas/biblioteca_roca.tres
+res://piezas/plataforma.tscn
+res://piezas/suelo.tscn

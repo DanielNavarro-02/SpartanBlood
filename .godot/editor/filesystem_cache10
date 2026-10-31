@@ -1,14 +1,19 @@
 78098b89c88a74ebe8c20117b8754620
-::res://::1793338549
+::res://::1793470479
+camera_3d.gd::GDScript::3007883414858874850::1793345244::0::1::::<>Camera3D<><>0<>0<><>::
 icon.svg::CompressedTexture2D::9031566727662553594::1793101768::1793338553::1::::<><><>0<>0<>d9f996d1dbe645fc33bdc0357d74b025<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 LEEME.txt::TextFile::-1::1793101768::0::1::::<><><>0<>0<><>::
-main.tscn::PackedScene::-1::1793101768::0::1::::<><><>0<>0<><>::res://personaje.gd<>res://personaje/character-male-a.glb
-personaje.gd::GDScript::3071488395763316490::1793101768::0::1::::<>CharacterBody3D<><>0<>0<><>::
-::res://personaje/::1793338367
+main.tscn::PackedScene::70095960223979038::1793345244::0::1::::<><><>0<>0<><>::uid://bi4bnu30rdc5w::::res://camera_3d.gd<>uid://bj0372xnq02wk::::res://personaje.gd<>uid://biu6tppn8ml1q::::res://personaje/character-male-a.glb
+personaje.gd::GDScript::3071488395763316490::1793344474::0::1::::<>CharacterBody3D<><>0<>0<><>::
+::res://fondos/::1793470480
+fondo_ruinas.png::CompressedTexture2D::8454118445714494440::1793147973::1793470519::1::::<><><>0<>0<>5a3d1d0f8df53cf962640041345f9040<>res://.godot/imported/fondo_ruinas.png-c6d3d6b661f376b4718c0e7ec670e308.ctex::
+fondo_ruinas_4k.png::CompressedTexture2D::276798481743751119::1793147984::1793470507::1::::<><><>0<>0<>0209d62d137c9036b502833c39fb80a7<>res://.godot/imported/fondo_ruinas_4k.png-6b5dbb4328c83f655b0bbbb2807f40ac.ctex::
+ruinas_environment.tres::Environment::-1::1793147857::0::1::::<><><>0<>0<><>::res://fondos/fondo_ruinas.png
+::res://personaje/::1793338562
 character-female-b.glb::PackedScene::4395892266121564148::1793101768::1793338561::1::::<><><>0<>0<>ddb55bb5a67be30839dc02aabfaf5a15<>res://.godot/imported/character-female-b.glb-503cd04c05c31313ea8932489876b749.scn::uid://mpfeiclm3obi::::res://personaje/Textures/colormap.png
 character-female-e.glb::PackedScene::8498449324438306630::1793101768::1793338561::1::::<><><>0<>0<>9359e5375f375aba82df4edd4ea9d118<>res://.godot/imported/character-female-e.glb-3362fbfb1a076431870b833efb897333.scn::uid://mpfeiclm3obi::::res://personaje/Textures/colormap.png
 character-male-a.glb::PackedScene::2991135956396072320::1793101768::1793338562::1::::<><><>0<>0<>523066caf8735ced702c4563f527e641<>res://.godot/imported/character-male-a.glb-3f828efe93bec79b9c573a7112d032ff.scn::uid://mpfeiclm3obi::::res://personaje/Textures/colormap.png
 character-male-d.glb::PackedScene::2161782367779501515::1793101768::1793338562::1::::<><><>0<>0<>773afff51b8215d756495bf0b784a5e1<>res://.godot/imported/character-male-d.glb-2f5c98e70616da82073b63ba465b742f.scn::uid://mpfeiclm3obi::::res://personaje/Textures/colormap.png
 LICENCIA Kenney (CC0).txt::TextFile::-1::1793101768::0::1::::<><><>0<>0<><>::
-::res://personaje/Textures/::1793338367
+::res://personaje/Textures/::1793338563
 colormap.png::CompressedTexture2D::873542941900089570::1793101768::1793338563::1::::<><><>0<>0<>df1f65193d3443feff895867f6fbcf39<>res://.godot/imported/colormap.png-2b39337a8bfecb91d904da17c75fef11.s3tc.ctex::

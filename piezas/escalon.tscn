@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Material" path="res://piezas/material_roca.tres" id="1_sdrvd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_63ky3"]
+size = Vector3(2, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mfeq1"]
+size = Vector3(2, 1, 4)
+
+[node name="escalon" type="StaticBody3D"]
+
+[node name="@MeshInstance3D@4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("1_sdrvd")
+mesh = SubResource("BoxMesh_63ky3")
+
+[node name="@CollisionShape3D@5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_mfeq1")

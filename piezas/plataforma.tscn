@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d16x4shq1f20r"]
+
+[ext_resource type="Material" uid="uid://dv0rt5h2ww7s0" path="res://piezas/material_roca.tres" id="1_w80l1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_12wc0"]
+size = Vector3(25, 50, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_63yf0"]
+size = Vector3(25, 50, 3)
+
+[node name="plataforma" type="StaticBody3D" unique_id=919205387]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24.788435, 0)
+
+[node name="@MeshInstance3D@8" type="MeshInstance3D" parent="." unique_id=370894906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = ExtResource("1_w80l1")
+mesh = SubResource("BoxMesh_12wc0")
+
+[node name="@CollisionShape3D@9" type="CollisionShape3D" parent="." unique_id=1316005426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_63yf0")
