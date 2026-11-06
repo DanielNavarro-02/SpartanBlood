@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://c8vpa1agd7ubg"]
+
+[ext_resource type="Texture2D" uid="uid://d7c3iecu66n8" path="res://fondos/fondo_ruinas_4k.png" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://detctttqyxqh4" path="res://menu.gd" id="1_ouk20"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yepx"]
+bg_color = Color(0.7529412, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfd64"]
+bg_color = Color(0.9984986, 0, 0.13658834, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3pf2"]
+bg_color = Color(0.40784314, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxslo"]
+bg_color = Color(0.7529412, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4oeg"]
+bg_color = Color(1, 0, 0.13725491, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m1076"]
+bg_color = Color(0.40784314, 0, 0, 1)
+
+[node name="MENU" type="Control" unique_id=172433939]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ouk20")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1764668341]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.7254902, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1432895743]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1472.0
+offset_top = -700.0
+offset_right = 1472.0
+offset_bottom = 700.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_lti8b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=226484757]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -96.0
+offset_right = 241.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 55
+
+[node name="Play" type="Button" parent="VBoxContainer" unique_id=934616235]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Salir")
+focus_neighbor_bottom = NodePath("../Salir")
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_1yepx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kfd64")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x3pf2")
+text = "JUGAR"
+
+[node name="Salir" type="Button" parent="VBoxContainer" unique_id=350860855]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Play")
+focus_neighbor_bottom = NodePath("../Play")
+theme_override_font_sizes/font_size = 44
+theme_override_styles/normal = SubResource("StyleBoxFlat_pxslo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_h4oeg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m1076")
+text = "SALIR"
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Salir" to="." method="_on_salir_pressed"]

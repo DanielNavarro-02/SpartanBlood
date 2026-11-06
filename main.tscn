@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://7dtiam5f8aie" path="res://mapa.tscn" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://bj0372xnq02wk" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" uid="uid://biu6tppn8ml1q" path="res://personaje/character-male-a.glb" id="2_modelo"]
+[ext_resource type="PackedScene" uid="uid://chym0ujvy5ejg" path="res://slash.tscn" id="5_7mycd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_escvc"]
 panorama = ExtResource("1_1bvp3")
@@ -44,6 +45,7 @@ objetivo = NodePath("../Personaje")
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241]
 axis_lock_linear_z = true
 script = ExtResource("1_pj")
+slash_scene = ExtResource("5_7mycd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje" unique_id=394902781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)

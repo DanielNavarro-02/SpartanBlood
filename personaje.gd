@@ -8,12 +8,20 @@ const RUIDO = [0.0, 2.0, 0.0]   # metros, en el mismo orden del enum
 @export var gravedad = 30.0
 @export var altura_salto = 4.0
 @onready var anim = $Modelo/AnimationPlayer
+@export var fuerza_dash = 18.0
+@export var duracion_dash = 0.2
+@export var cooldown_dash = 0.6
+
+@export var slash_scene: PackedScene
 
 # Enchufes: otros scripts (las acciones del juego) cambian estas tres variables.
 var multiplicador = 1.0     # 1 = rapidez normal, 0.5 = la mitad, 0 = quieto
 var empuje = Vector3.ZERO   # velocidad extra en m/s (dash, retroceso)
 var accion = ""             # animación de la acción; "" = ninguna
 var avance = 0.0
+var tiempo_dash = 0.0
+var tiempo_cooldown = 0.0
+var direccion_dash = 1.0
 
 var estado = Estado.QUIETO
 var ruido = 0.0
@@ -32,6 +40,34 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("saltar") and coyote > 0:
 		velocity.y = sqrt(2 * gravedad * altura_salto)
 		coyote = 0.0   # evita saltar dos veces
+		
+	# Atacar
+	if Input.is_action_just_pressed("Atacar") and accion == "":
+		crear_slash()  # efecto
+	
+	# dash
+	tiempo_cooldown = maxf(tiempo_cooldown - delta, 0.0)
+	tiempo_dash = maxf(tiempo_dash - delta, 0.0)
+	
+	# activar el dash
+	if Input.is_action_just_pressed("dash") and tiempo_cooldown <= 0:
+		# decide la direccion
+		if absf(avance) > 0.1:
+			direccion_dash = sign(avance) # hacia donde se mueve
+		else:
+			direccion_dash = -sign(rotation.y) # hacia donde mira
+			
+		tiempo_dash = duracion_dash
+		tiempo_cooldown = cooldown_dash
+		accion = "dash"
+		
+	# Aplicar o quitar el empuje
+	if tiempo_dash > 0.0:
+		empuje.x = direccion_dash * fuerza_dash
+	else:
+		empuje.x = 0.0
+		if accion == "dash":
+			accion = ""
 
 	# Movimiento horizontal con arranque y frenado
 	var lado = Input.get_axis("move_left", "move_right")
@@ -52,7 +88,35 @@ func _physics_process(delta):
 		print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
 	animar()
 	_prueba()
-
+	
+func crear_slash():
+	if slash_scene == null:
+		print("ERROR: slash_scene no está asignado")
+		return
+	
+	var slash = slash_scene.instantiate()
+	get_tree().current_scene.add_child(slash)
+	
+	# Dirección: +1 derecha, -1 izquierda
+	var direccion = -sign(rotation.y)
+	if direccion == 0:
+		direccion = 1   # por si acaso
+	
+	# Posición delante del personaje
+	slash.global_position = global_position + Vector3(direccion * 1.5, 1.1, 0)
+	
+	# Orientación segura para 2.5D
+	slash.rotation_degrees = Vector3(0, 0, 0)  # limpio
+	slash.scale = Vector3(direccion, 1, 1)     # solo volteamos en X
+	
+	# Activar partículas
+	var particles = slash.get_node_or_null("GPUParticles3D")
+	if particles:
+		particles.emitting = true
+		particles.restart()
+		print("Slash creado en dirección: ", direccion)
+	else:
+		print("ERROR: No se encontró el nodo GPUParticles3D")
 
 func elegir_estado():
 	if not is_on_floor():
