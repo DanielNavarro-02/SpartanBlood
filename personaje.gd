@@ -28,6 +28,7 @@ var ruido = 0.0
 var coyote = 0.0            # tiempo de gracia para saltar
 
 
+  	
 func _physics_process(delta):
 	# Gravedad y coyote
 	if is_on_floor():

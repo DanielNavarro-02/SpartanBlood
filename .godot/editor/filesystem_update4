@@ -1,7 +1,6 @@
-res://main.tscn
-res://fondos/ruinas_environment.tres
-res://piezas/material_roca.tres
 res://mapa.tscn
-res://piezas/biblioteca_roca.tres
-res://piezas/plataforma.tscn
-res://piezas/suelo.tscn
+res://piezas/material_roca.tres
+res://main.tscn
+res://material_mundo.gdshader
+res://onda.gd
+res://personaje.gd
