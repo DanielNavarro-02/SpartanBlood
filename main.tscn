@@ -42,7 +42,7 @@ size = 10.0
 script = ExtResource("1_h2yge")
 objetivo = NodePath("../Personaje")
 
-[node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241]
+[node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241 groups=["jugador"]]
 transform = Transform3D(-0.9879301, 0, -0.15490007, 0, 1, 0, 0.15490007, 0, -0.9879301, -51.029316, 6, 0)
 axis_lock_linear_z = true
 script = ExtResource("1_pj")
