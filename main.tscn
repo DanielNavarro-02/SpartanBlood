@@ -54,3 +54,13 @@ shape = SubResource("Capsula")
 
 [node name="Modelo" parent="Personaje" unique_id=625367630 instance=ExtResource("2_modelo")]
 transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+
+[node name="OmniLight3D" type="SpotLight3D" parent="." unique_id=885961551]
+transform = Transform3D(-0.07142958, 0, -0.9974457, 0, 1, 0, 0.9974457, 0, -0.07142958, -58.1263, 9.33946, -2.1114492)
+light_color = Color(0.99760073, 0.8713985, 0.67612225, 1)
+light_energy = 12.089
+light_indirect_energy = 4.802
+light_volumetric_fog_energy = 0.683
+spot_range = 8.195
+spot_attenuation = -0.6
+spot_angle = 39.65

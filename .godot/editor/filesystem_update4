@@ -4,3 +4,4 @@ res://main.tscn
 res://material_mundo.gdshader
 res://onda.gd
 res://personaje.gd
+res://piezas/plataforma.tscn
