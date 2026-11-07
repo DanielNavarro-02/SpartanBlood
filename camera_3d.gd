@@ -18,5 +18,4 @@ func _physics_process(delta):
 	var destino = objetivo.global_position + distancia
 	global_position = global_position.lerp(destino, suavizado * delta)
 	# Medida (bórrenla al terminar):
-	if Engine.get_physics_frames() % 30 == 0:
-		print("cámara ", global_position.snappedf(0.01))
+	

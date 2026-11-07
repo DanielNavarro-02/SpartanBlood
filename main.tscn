@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bj0372xnq02wk" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" uid="uid://biu6tppn8ml1q" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="PackedScene" uid="uid://chym0ujvy5ejg" path="res://slash.tscn" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://05xu15om4mv" path="res://gladiador.gd" id="7_5vw27"]
+[ext_resource type="PackedScene" uid="uid://52giffn4ww16" path="res://personaje/character-male-d.glb" id="8_kek77"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_escvc"]
 panorama = ExtResource("1_1bvp3")
@@ -21,6 +23,10 @@ sky = SubResource("Cielo")
 sky_custom_fov = 42.7
 
 [sub_resource type="CapsuleShape3D" id="Capsula"]
+radius = 0.35
+height = 1.75
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
 radius = 0.35
 height = 1.75
 
@@ -64,3 +70,15 @@ light_volumetric_fog_energy = 0.683
 spot_range = 8.195
 spot_attenuation = -0.6
 spot_angle = 39.65
+
+[node name="Gladiador" type="CharacterBody3D" parent="." unique_id=330379699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.796646, 6.9993725, 0)
+axis_lock_linear_z = true
+script = ExtResource("7_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gladiador" unique_id=496473975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[node name="Modelo" parent="Gladiador" unique_id=933404968 instance=ExtResource("8_kek77")]
+transform = Transform3D(-2.6, 0, -2.2729921e-07, 0, 2.6, 0, 2.2729921e-07, 0, -2.6, 0, 0, 0)
