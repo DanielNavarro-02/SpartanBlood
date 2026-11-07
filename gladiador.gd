@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA }
+enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
 
 @export var rapidez = 2.0
 @export var rango_ataque = 1.2
@@ -8,6 +8,9 @@ enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA }
 @export var tiempo_recarga = 1.2
 @export var alcance_golpe = 1.5
 @export var danio = 1
+@export var vida = 3.0
+@export var vida_huida = 1.0
+@export var danio_prueba = 1.0
 
 var estado = Estado.ACERCARSE
 var reloj = 0.0
@@ -23,6 +26,7 @@ func _physics_process(delta):
 	velocity += get_gravity() * delta
 	reloj = maxf(reloj - delta, 0.0)
 
+
 	var nuevo = decidir()
 	if nuevo != estado:
 		cambiar_a(nuevo)
@@ -37,12 +41,18 @@ func _physics_process(delta):
 			golpear()
 		Estado.RECARGA:
 			frenar("idle")
+		Estado.HUIR:
+			# Huir es perseguir con la flecha al revés.
+			var lejos = global_position - jugador.global_position
+			ir_a(global_position + lejos)
 
 	move_and_slide()
 
 
-# Desde cada estado solo se puede pasar a uno: el ciclo del ataque.
 func decidir():
+	# Va primero: le gana a cualquier estado, también al AVISO.
+	if vida <= vida_huida:
+		return Estado.HUIR
 	match estado:
 		Estado.ACERCARSE:
 			if distancia() <= rango_ataque:
@@ -58,6 +68,16 @@ func decidir():
 	return estado
 
 
+# Se llama igual que en la diana del Taller 8: el rayo ya la sabe usar.
+func recibir_golpe(cuanto):
+	vida -= cuanto
+	print(name, " vida ", vida)
+	if vida <= 0:
+		print(name, " vencido")
+		print("+5 óbolos")
+		queue_free()
+
+
 func cambiar_a(nuevo):
 	estado = nuevo
 	print(name, " -> ", Estado.keys()[estado], " cuadro ",
@@ -69,7 +89,6 @@ func cambiar_a(nuevo):
 		reloj = tiempo_recarga
 
 
-# El aviso le da tiempo al jugador: el golpe mira DÓNDE ESTÁ AHORA.
 func golpear():
 	if distancia() > alcance_golpe:
 		print(name, " falla a ", snappedf(distancia(), 0.01), " m")
