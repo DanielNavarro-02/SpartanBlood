@@ -85,8 +85,8 @@ func _physics_process(delta):
 	var antes = estado
 	estado = elegir_estado()
 	ruido = RUIDO[estado]
-	if estado != antes:
-		print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
+	#if estado != antes:
+	#	print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
 	animar()
 	_prueba()
 	

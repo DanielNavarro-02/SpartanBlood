@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://chym0ujvy5ejg" path="res://slash.tscn" id="5_7mycd"]
 [ext_resource type="Script" uid="uid://05xu15om4mv" path="res://gladiador.gd" id="7_5vw27"]
 [ext_resource type="PackedScene" uid="uid://52giffn4ww16" path="res://personaje/character-male-d.glb" id="8_kek77"]
+[ext_resource type="Script" uid="uid://co2ljkx4a026c" path="res://salud.gd" id="9_kek77"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_escvc"]
 panorama = ExtResource("1_1bvp3")
@@ -32,7 +33,7 @@ height = 1.75
 
 [node name="Main" type="Node3D" unique_id=253992802]
 
-[node name="Node3D" parent="." unique_id=2144173280 instance=ExtResource("1_lquwl")]
+[node name="Mapa" parent="." unique_id=2144173280 instance=ExtResource("1_lquwl")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=574913280]
 environment = SubResource("Entorno")
@@ -82,3 +83,6 @@ shape = SubResource("CapsuleShape3D_4kxuq")
 
 [node name="Modelo" parent="Gladiador" unique_id=933404968 instance=ExtResource("8_kek77")]
 transform = Transform3D(-2.6, 0, -2.2729921e-07, 0, 2.6, 0, 2.2729921e-07, 0, -2.6, 0, 0, 0)
+
+[node name="Salud" type="Node" parent="." unique_id=1387222196]
+script = ExtResource("9_kek77")

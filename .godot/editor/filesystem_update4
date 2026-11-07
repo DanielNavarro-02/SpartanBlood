@@ -7,3 +7,4 @@ res://personaje.gd
 res://piezas/plataforma.tscn
 res://gladiador.gd
 res://camera_3d.gd
+res://salud.gd
