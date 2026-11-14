@@ -4,8 +4,12 @@
 [ext_resource type="Script" uid="uid://bi4bnu30rdc5w" path="res://camera_3d.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://7dtiam5f8aie" path="res://mapa.tscn" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://bj0372xnq02wk" path="res://personaje.gd" id="1_pj"]
-[ext_resource type="PackedScene" uid="uid://biu6tppn8ml1q" path="res://personaje/character-male-a.glb" id="2_modelo"]
 [ext_resource type="PackedScene" uid="uid://chym0ujvy5ejg" path="res://slash.tscn" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://b4ro3qwlwn74t" path="res://personaje/Untitled.glb" id="6_4c57u"]
+[ext_resource type="Script" uid="uid://05xu15om4mv" path="res://gladiador.gd" id="7_5vw27"]
+[ext_resource type="PackedScene" uid="uid://52giffn4ww16" path="res://personaje/character-male-d.glb" id="8_kek77"]
+[ext_resource type="Script" uid="uid://co2ljkx4a026c" path="res://salud.gd" id="9_kek77"]
+[ext_resource type="Script" uid="uid://de8phwtkj1olr" path="res://area_3d.gd" id="10_4c57u"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_escvc"]
 panorama = ExtResource("1_1bvp3")
@@ -24,9 +28,16 @@ sky_custom_fov = 42.7
 radius = 0.35
 height = 1.75
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
+radius = 0.35
+height = 1.75
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hchaj"]
+size = Vector3(0.5, 3, 1)
+
 [node name="Main" type="Node3D" unique_id=253992802]
 
-[node name="Node3D" parent="." unique_id=2144173280 instance=ExtResource("1_lquwl")]
+[node name="Mapa" parent="." unique_id=2144173280 instance=ExtResource("1_lquwl")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=574913280]
 environment = SubResource("Entorno")
@@ -42,14 +53,49 @@ size = 10.0
 script = ExtResource("1_h2yge")
 objetivo = NodePath("../Personaje")
 
-[node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241]
+[node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241 groups=["jugador"]]
+transform = Transform3D(-0.9879301, 0, -0.15490007, 0, 1, 0, 0.15490007, 0, -0.9879301, -51.029316, 6, 0)
 axis_lock_linear_z = true
 script = ExtResource("1_pj")
+rango_ataque_jugador = 2.0
 slash_scene = ExtResource("5_7mycd")
+
+[node name="Modelo" parent="Personaje" unique_id=808733841 instance=ExtResource("6_4c57u")]
+transform = Transform3D(-2.5686183, 0, 0.40274018, 0, 2.6, 0, -0.40274018, 0, -2.5686183, 0, 0.08197212, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje" unique_id=394902781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
-[node name="Modelo" parent="Personaje" unique_id=625367630 instance=ExtResource("2_modelo")]
-transform = Transform3D(-2.6, 0, 0, 0, 2.6, 0, 0, 0, -2.6, 0, 0, 0)
+[node name="Aura" type="OmniLight3D" parent="Personaje" unique_id=1939269981]
+transform = Transform3D(1.0000001, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 1.0000001, -0.14299393, 2.456852, -5.0527105)
+visible = false
+omni_range = 60.0
+omni_attenuation = -0.705
+
+[node name="Gladiador" type="CharacterBody3D" parent="." unique_id=330379699 groups=["enemigos"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.796646, 6.9993725, 0)
+axis_lock_linear_z = true
+script = ExtResource("7_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gladiador" unique_id=496473975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[node name="Modelo" parent="Gladiador" unique_id=933404968 instance=ExtResource("8_kek77")]
+transform = Transform3D(-2.6, 0, -2.2729921e-07, 0, 2.6, 0, 2.2729921e-07, 0, -2.6, 0, 0, 0)
+
+[node name="Salud" type="Node" parent="." unique_id=1387222196]
+script = ExtResource("9_kek77")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1527612261 node_paths=PackedStringArray("luz_exterior", "world_environment")]
+script = ExtResource("10_4c57u")
+luz_exterior = NodePath("../DirectionalLight3D")
+world_environment = NodePath("../WorldEnvironment")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1543570440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6095095, 7.258193, 0)
+shape = SubResource("BoxShape3D_hchaj")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]

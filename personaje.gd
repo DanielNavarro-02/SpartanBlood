@@ -11,8 +11,12 @@ const RUIDO = [0.0, 2.0, 0.0]   # metros, en el mismo orden del enum
 @export var fuerza_dash = 18.0
 @export var duracion_dash = 0.2
 @export var cooldown_dash = 0.6
+@export var rango_ataque_jugador = 1.8
+@export var danio_jugador = 1
+@export var fuerza_empuje_jugador = 5.0
 
 @export var slash_scene: PackedScene
+@export var fuerza_amortiguacion_retroceso = 12.0
 
 # Enchufes: otros scripts (las acciones del juego) cambian estas tres variables.
 var multiplicador = 1.0     # 1 = rapidez normal, 0.5 = la mitad, 0 = quieto
@@ -22,13 +26,16 @@ var avance = 0.0
 var tiempo_dash = 0.0
 var tiempo_cooldown = 0.0
 var direccion_dash = 1.0
+var velocidad_retroceso = Vector3.ZERO
 
 var estado = Estado.QUIETO
 var ruido = 0.0
 var coyote = 0.0            # tiempo de gracia para saltar
 
 
+  	
 func _physics_process(delta):
+	velocidad_retroceso = velocidad_retroceso.move_toward(Vector3.ZERO, fuerza_amortiguacion_retroceso * delta)
 	# Gravedad y coyote
 	if is_on_floor():
 		coyote = 0.10
@@ -43,7 +50,7 @@ func _physics_process(delta):
 		
 	# Atacar
 	if Input.is_action_just_pressed("Atacar") and accion == "":
-		crear_slash()  # efecto
+		atacar()  # efecto
 	
 	# dash
 	tiempo_cooldown = maxf(tiempo_cooldown - delta, 0.0)
@@ -59,7 +66,7 @@ func _physics_process(delta):
 			
 		tiempo_dash = duracion_dash
 		tiempo_cooldown = cooldown_dash
-		accion = "dash"
+		#accion = "dash"
 		
 	# Aplicar o quitar el empuje
 	if tiempo_dash > 0.0:
@@ -73,7 +80,7 @@ func _physics_process(delta):
 	var lado = Input.get_axis("move_left", "move_right")
 	var paso = speed / tiempo_arranque * delta
 	avance = move_toward(avance, lado * speed * multiplicador, paso)
-	velocity.x = avance + empuje.x
+	velocity.x = avance + empuje.x + velocidad_retroceso.x
 
 	if lado != 0:
 		rotation.y = -PI / 2 * sign(lado)   # mira hacia +X o hacia -X
@@ -84,39 +91,67 @@ func _physics_process(delta):
 	var antes = estado
 	estado = elegir_estado()
 	ruido = RUIDO[estado]
-	if estado != antes:
-		print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
+	#if estado != antes:
+	#	print("estado ", Estado.keys()[estado], " · ruido ", ruido, " m")
 	animar()
 	_prueba()
 	
-func crear_slash():
-	if slash_scene == null:
-		print("ERROR: slash_scene no está asignado")
+func atacar():
+	if accion != "":
 		return
 	
-	var slash = slash_scene.instantiate()
-	get_tree().current_scene.add_child(slash)
+	accion = "Atacar"
 	
-	# Dirección: +1 derecha, -1 izquierda
+	if not anim.has_animation("Atacar"):
+		print("ERROR: No existe la animación 'Atacar'")
+		print("Animaciones disponibles: ", anim.get_animation_list())
+		accion = ""
+		return
+	
+	anim.play("Atacar")
+	
+	# Duración real de la animación
+	var duracion = anim.get_animation("Atacar").length
+	
+	# Espera hasta el momento del golpe (aprox. 35% de la animación)
+	# Puedes cambiar el 0.35 si quieres que el golpe sea más temprano o más tarde
+	await get_tree().create_timer(duracion * 0.35).timeout
+	
+	# Si se interrumpió el ataque, no hacemos daño
+	if accion != "Atacar":
+		return
+	
+	# === AQUÍ se aplica el daño ===
 	var direccion = -sign(rotation.y)
 	if direccion == 0:
-		direccion = 1   # por si acaso
+		direccion = 1.0
 	
-	# Posición delante del personaje
-	slash.global_position = global_position + Vector3(direccion * 1.5, 1.1, 0)
+	for enemigo in get_tree().get_nodes_in_group("enemigos"):
+		if not is_instance_valid(enemigo):
+			continue
+		
+		var dist = Vector2(
+			enemigo.global_position.x - global_position.x,
+			enemigo.global_position.z - global_position.z
+		).length()
+		
+		if dist <= rango_ataque_jugador:
+			var hacia_enemigo = (enemigo.global_position - global_position).normalized()
+			
+			if (direccion > 0 and hacia_enemigo.x > 0) or (direccion < 0 and hacia_enemigo.x < 0):
+				if enemigo.has_method("recibir_golpe"):
+					enemigo.recibir_golpe(danio_jugador)
+				
+				if enemigo.has_method("recibir_retroceso"):
+					var dir_empuje = (enemigo.global_position - global_position).normalized()
+					dir_empuje.y = 0.0
+					enemigo.recibir_retroceso(dir_empuje, fuerza_empuje_jugador)
 	
-	# Orientación segura para 2.5D
-	slash.rotation_degrees = Vector3(0, 0, 0)  # limpio
-	slash.scale = Vector3(direccion, 1, 1)     # solo volteamos en X
+	# Espera el resto de la animación
+	await get_tree().create_timer(duracion * 0.65).timeout
 	
-	# Activar partículas
-	var particles = slash.get_node_or_null("GPUParticles3D")
-	if particles:
-		particles.emitting = true
-		particles.restart()
-		print("Slash creado en dirección: ", direccion)
-	else:
-		print("ERROR: No se encontró el nodo GPUParticles3D")
+	if accion == "Atacar":
+		accion = ""
 
 func elegir_estado():
 	if not is_on_floor():
@@ -128,16 +163,19 @@ func elegir_estado():
 
 func animar():
 	if accion != "":
-		anim.play(accion)
+		if anim.current_animation != accion or not anim.is_playing():
+			anim.play(accion)
 		return
 	match estado:
 		Estado.QUIETO:
-			anim.play("idle")
+			anim.play("Idle")
 		Estado.CAMINAR:
-			anim.play("walk")
-		Estado.AIRE:
-			anim.play("jump" if velocity.y > 0 else "fall")
+			anim.play("Correr")
+		#Estado.AIRE:
+			#anim.play("jump" if velocity.y > 0 else "fall")
 	
+func recibir_retroceso(direccion: Vector3, fuerza: float):
+	velocidad_retroceso = direccion * fuerza
 
 
 # ---------------------------------------------------------------------------

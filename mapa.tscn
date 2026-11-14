@@ -2,11 +2,35 @@
 
 [ext_resource type="PackedScene" uid="uid://d16x4shq1f20r" path="res://piezas/plataforma.tscn" id="2_70f7c"]
 [ext_resource type="PackedScene" uid="uid://87p8i78fwxev" path="res://piezas/suelo.tscn" id="2_q8ihy"]
+[ext_resource type="Shader" uid="uid://cbrflrga83jot" path="res://material_mundo.gdshader" id="3_q8ihy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mti6b"]
+render_priority = 0
+shader = ExtResource("3_q8ihy")
+shader_parameter/color_bajo = Color(0.101960786, 0.08627451, 0.07450981, 1)
+shader_parameter/amplitud = 0.08
+shader_parameter/longitud = 1.5
+shader_parameter/periodo = 1.4
+
+[sub_resource type="QuadMesh" id="QuadMesh_4kxuq"]
+size = Vector2(6, 4)
+subdivide_width = 28
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4kxuq"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mti6b"]
+albedo_color = Color(0.30736542, 0.13637304, 0.01710336, 1)
 
 [node name="mapa" type="Node3D" unique_id=2144173280]
 
 [node name="plataforma9" parent="." unique_id=450586919 instance=ExtResource("2_70f7c")]
-transform = Transform3D(-0.0030848177, 0.99999523, 0, -0.99999523, -0.0030848177, 0, 0, 0, 1, -51.07686, -29.038229, 0)
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -51.07686, -29.038229, 0)
+
+[node name="plataforma9" parent="plataforma9" unique_id=919205387 instance=ExtResource("2_70f7c")]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, -22.561779, -3.579216, 0)
 
 [node name="plataforma5" parent="." unique_id=275771868 instance=ExtResource("2_70f7c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.167141, 27.810257, 0)
@@ -17,11 +41,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.753395, -24.867283, 0)
 [node name="plataforma2" parent="." unique_id=915619349 instance=ExtResource("2_70f7c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.960632, -24.877636, 0)
 
-[node name="plataforma3" parent="." unique_id=1412097491 instance=ExtResource("2_70f7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.285095, 5.561775, 0)
-
 [node name="plataforma4" parent="." unique_id=979161792 instance=ExtResource("2_70f7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.861454, 31.67339, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.861454, 33.992126, 0)
 
 [node name="salida" parent="." unique_id=541705558 instance=ExtResource("2_q8ihy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.659182, 1, 0)
@@ -33,10 +54,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.502253, 2, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.956505, -63.22844, 0)
 
 [node name="plataforma7" parent="." unique_id=2060501356 instance=ExtResource("2_70f7c")]
-transform = Transform3D(-0.016818978, 0.99985856, 0, -0.99985856, -0.016818978, 0, 0, 0, 1, 17.547825, -72.00704, 0)
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 17.547825, -72.00704, 0)
 
 [node name="plataforma8" parent="." unique_id=356093689 instance=ExtResource("2_70f7c")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.311586, -18.896982, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.311586, -18.738379, 0)
 
 [node name="plataforma10" parent="." unique_id=1620950058 instance=ExtResource("2_70f7c")]
 transform = Transform3D(-0.9999808, -0.006169606, 0, 0.006169606, -0.9999808, 0, 0, 0, 1, -43.724754, -73.825806, 0)
@@ -59,5 +80,55 @@ transform = Transform3D(-0.9999808, -0.006169606, 0, 0.006169606, -0.9999808, 0,
 [node name="plataforma14" parent="plataforma15/plataforma10/plataforma10" unique_id=1923085556 instance=ExtResource("2_70f7c")]
 transform = Transform3D(-0.9998292, 0.018507892, 0, -0.018507892, -0.9998292, 0, 0, 0, 1, -17.796562, 3.3972626, 0)
 
-[node name="plataforma13" parent="plataforma15/plataforma10/plataforma10" unique_id=919205387 instance=ExtResource("2_70f7c")]
+[node name="plataforma13" parent="plataforma15/plataforma10/plataforma10" unique_id=1255059868 instance=ExtResource("2_70f7c")]
 transform = Transform3D(-0.999981, 0.006169608, 0, -0.006169608, -0.999981, 0, 0, 0, 1, -19.678225, 4.9356384, 0)
+
+[node name="Estandarte" type="MeshInstance3D" parent="." unique_id=569383658]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.195396, 10.244692, -2.374714)
+material_override = SubResource("ShaderMaterial_mti6b")
+mesh = SubResource("QuadMesh_4kxuq")
+
+[node name="Estandarte" type="MeshInstance3D" parent="Estandarte" unique_id=640120502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.150982, -0.34243965, -2.374714)
+material_override = SubResource("ShaderMaterial_mti6b")
+mesh = SubResource("QuadMesh_4kxuq")
+
+[node name="Estandarte" type="MeshInstance3D" parent="Estandarte/Estandarte" unique_id=2128064544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.150982, -0.34243965, -2.374714)
+material_override = SubResource("ShaderMaterial_mti6b")
+mesh = SubResource("QuadMesh_4kxuq")
+
+[node name="Estandarte" type="MeshInstance3D" parent="Estandarte/Estandarte/Estandarte" unique_id=1354383895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.150982, -0.34243965, -2.374714)
+material_override = SubResource("ShaderMaterial_mti6b")
+mesh = SubResource("QuadMesh_4kxuq")
+
+[node name="Estandarte" type="MeshInstance3D" parent="Estandarte/Estandarte/Estandarte/Estandarte" unique_id=659334760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.150982, -0.34243965, -2.374714)
+material_override = SubResource("ShaderMaterial_mti6b")
+mesh = SubResource("QuadMesh_4kxuq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Estandarte" unique_id=620821831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1378021, -2.5931454, 0)
+mesh = SubResource("CylinderMesh_4kxuq")
+surface_material_override/0 = SubResource("StandardMaterial3D_mti6b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Estandarte/MeshInstance3D" unique_id=1708810513]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.293331, -0.3753147, -2.440032)
+mesh = SubResource("CylinderMesh_4kxuq")
+surface_material_override/0 = SubResource("StandardMaterial3D_mti6b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Estandarte/MeshInstance3D/MeshInstance3D" unique_id=79727352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.293331, -0.3753147, -2.2604656)
+mesh = SubResource("CylinderMesh_4kxuq")
+surface_material_override/0 = SubResource("StandardMaterial3D_mti6b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Estandarte/MeshInstance3D/MeshInstance3D/MeshInstance3D" unique_id=1929953103]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.977682, -0.3753147, -2.4250326)
+mesh = SubResource("CylinderMesh_4kxuq")
+surface_material_override/0 = SubResource("StandardMaterial3D_mti6b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Estandarte/MeshInstance3D/MeshInstance3D/MeshInstance3D/MeshInstance3D" unique_id=2103381532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.14767, -0.3753147, -2.5424242)
+mesh = SubResource("CylinderMesh_4kxuq")
+surface_material_override/0 = SubResource("StandardMaterial3D_mti6b")

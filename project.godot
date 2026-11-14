@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="SpartanBlood"
-run/main_scene="res://main.tscn"
+config/name="Spartan Blood 2"
+run/main_scene="uid://c8vpa1agd7ubg"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=1
 
 [input]
 
