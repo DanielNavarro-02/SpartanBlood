@@ -11,10 +11,12 @@ enum Estado { ACERCARSE, AVISO, GOLPE, RECARGA, HUIR }
 @export var vida = 3.0
 @export var vida_huida = 1.0
 @export var danio_prueba = 1.0
+@export var fuerza_amortiguacion_retroceso = 10.0
 
 var estado = Estado.ACERCARSE
 var reloj = 0.0
 var jugador = null
+var velocidad_retroceso = Vector3.ZERO
 @onready var anim = $Modelo/AnimationPlayer
 
 
@@ -23,6 +25,8 @@ func _ready():
 
 
 func _physics_process(delta):
+	velocidad_retroceso = velocidad_retroceso.move_toward(Vector3.ZERO, fuerza_amortiguacion_retroceso * delta)
+	
 	velocity += get_gravity() * delta
 	reloj = maxf(reloj - delta, 0.0)
 
@@ -45,8 +49,15 @@ func _physics_process(delta):
 			# Huir es perseguir con la flecha al revés.
 			var lejos = global_position - jugador.global_position
 			ir_a(global_position + lejos)
+			
+	var velocidad_final = velocity
+	velocidad_final.x += velocidad_retroceso.x
+	velocidad_final.z += velocidad_retroceso.z
+	velocity = velocidad_final
 
 	move_and_slide()
+	velocity.x -= velocidad_retroceso.x
+	velocity.z -= velocidad_retroceso.z
 
 
 func decidir():
@@ -76,6 +87,9 @@ func recibir_golpe(cuanto):
 		print(name, " vencido")
 		print("+5 óbolos")
 		queue_free()
+		
+func recibir_retroceso(direccion: Vector3, fuerza: float):
+	velocidad_retroceso = direccion * fuerza
 
 
 func cambiar_a(nuevo):
@@ -93,9 +107,17 @@ func golpear():
 	if distancia() > alcance_golpe:
 		print(name, " falla a ", snappedf(distancia(), 0.01), " m")
 		return
-	var salud = jugador.get_node_or_null("Salud")
-	if salud != null:
-		salud.recibir_golpe(danio)
+		
+	if jugador != null:
+		var salud = jugador.get_node_or_null("Salud")
+		if salud != null:
+			salud.recibir_golpe(danio)
+			
+		var direccion_empuje = (jugador.global_position - global_position).normalized()
+		direccion_empuje.y = 0.0 
+		
+		if jugador.has_method("recibir_retroceso"):
+			jugador.recibir_retroceso(direccion_empuje, 6.0)
 
 
 func ir_a(destino):
