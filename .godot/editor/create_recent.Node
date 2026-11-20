@@ -1,4 +1,11 @@
+Label3D
+OmniLight3D
+MeshInstance3D
+Node3D
+DirectionalLight3D
+Marker3D
+CPUParticles3D
+Sprite3D
 CollisionShape3D
 Area3D
 GridMap
-Node3D
