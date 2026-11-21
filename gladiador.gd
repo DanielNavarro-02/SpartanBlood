@@ -17,6 +17,7 @@ var estado = Estado.ACERCARSE
 var reloj = 0.0
 var jugador = null
 var velocidad_retroceso = Vector3.ZERO
+var derrotado = false
 @onready var anim = $Modelo/AnimationPlayer
 
 
@@ -80,13 +81,29 @@ func decidir():
 
 
 # Se llama igual que en la diana del Taller 8: el rayo ya la sabe usar.
+
 func recibir_golpe(cuanto):
+	if derrotado:
+		return
+	
 	vida -= cuanto
 	print(name, " vida ", vida)
+	
 	if vida <= 0:
+		derrotado = true
 		print(name, " vencido")
-		print("+5 óbolos")
+		
+		var jugador = get_tree().get_first_node_in_group("jugador")
+		
+		if jugador != null:
+			var salud = jugador.get_node_or_null("Salud")
+			
+			if salud != null:
+				salud.agregar_obolos(5)
+				salud.agregar_sangre(1)
+		
 		queue_free()
+
 		
 func recibir_retroceso(direccion: Vector3, fuerza: float):
 	velocidad_retroceso = direccion * fuerza

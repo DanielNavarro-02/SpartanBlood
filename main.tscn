@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://52giffn4ww16" path="res://personaje/character-male-d.glb" id="8_kek77"]
 [ext_resource type="Script" uid="uid://co2ljkx4a026c" path="res://salud.gd" id="9_kek77"]
 [ext_resource type="Script" uid="uid://de8phwtkj1olr" path="res://area_3d.gd" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://b78p4aotkmc5s" path="res://zona_camara.gd" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://co0lp4xervh85" path="res://hud.tscn" id="12_dg77c"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_escvc"]
 panorama = ExtResource("1_1bvp3")
@@ -35,6 +37,279 @@ height = 1.75
 [sub_resource type="BoxShape3D" id="BoxShape3D_hchaj"]
 size = Vector3(0.5, 3, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_mti6b"]
+size = Vector3(13.333221, 4.480591, 2.7194824)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mm1bc"]
+size = Vector3(39.78396, 19.10262, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_62yky"]
+size = Vector3(100, 29.608398, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qwqyf"]
+size = Vector3(42.65753, 17.861084, 1)
+
+[sub_resource type="FontFile" id="FontFile_qe4n8"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/33/0/ascent = 0.0
+cache/0/33/0/descent = 0.0
+cache/0/33/0/underline_position = 0.0
+cache/0/33/0/underline_thickness = 0.0
+cache/0/33/0/scale = 1.0
+cache/0/34/0/ascent = 0.0
+cache/0/34/0/descent = 0.0
+cache/0/34/0/underline_position = 0.0
+cache/0/34/0/underline_thickness = 0.0
+cache/0/34/0/scale = 1.0
+cache/0/35/0/ascent = 0.0
+cache/0/35/0/descent = 0.0
+cache/0/35/0/underline_position = 0.0
+cache/0/35/0/underline_thickness = 0.0
+cache/0/35/0/scale = 1.0
+cache/0/36/0/ascent = 0.0
+cache/0/36/0/descent = 0.0
+cache/0/36/0/underline_position = 0.0
+cache/0/36/0/underline_thickness = 0.0
+cache/0/36/0/scale = 1.0
+cache/0/37/0/ascent = 0.0
+cache/0/37/0/descent = 0.0
+cache/0/37/0/underline_position = 0.0
+cache/0/37/0/underline_thickness = 0.0
+cache/0/37/0/scale = 1.0
+cache/0/38/0/ascent = 0.0
+cache/0/38/0/descent = 0.0
+cache/0/38/0/underline_position = 0.0
+cache/0/38/0/underline_thickness = 0.0
+cache/0/38/0/scale = 1.0
+cache/0/39/0/ascent = 0.0
+cache/0/39/0/descent = 0.0
+cache/0/39/0/underline_position = 0.0
+cache/0/39/0/underline_thickness = 0.0
+cache/0/39/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+cache/0/41/0/ascent = 0.0
+cache/0/41/0/descent = 0.0
+cache/0/41/0/underline_position = 0.0
+cache/0/41/0/underline_thickness = 0.0
+cache/0/41/0/scale = 1.0
+cache/0/42/0/ascent = 0.0
+cache/0/42/0/descent = 0.0
+cache/0/42/0/underline_position = 0.0
+cache/0/42/0/underline_thickness = 0.0
+cache/0/42/0/scale = 1.0
+cache/0/43/0/ascent = 0.0
+cache/0/43/0/descent = 0.0
+cache/0/43/0/underline_position = 0.0
+cache/0/43/0/underline_thickness = 0.0
+cache/0/43/0/scale = 1.0
+cache/0/44/0/ascent = 0.0
+cache/0/44/0/descent = 0.0
+cache/0/44/0/underline_position = 0.0
+cache/0/44/0/underline_thickness = 0.0
+cache/0/44/0/scale = 1.0
+cache/0/45/0/ascent = 0.0
+cache/0/45/0/descent = 0.0
+cache/0/45/0/underline_position = 0.0
+cache/0/45/0/underline_thickness = 0.0
+cache/0/45/0/scale = 1.0
+cache/0/46/0/ascent = 0.0
+cache/0/46/0/descent = 0.0
+cache/0/46/0/underline_position = 0.0
+cache/0/46/0/underline_thickness = 0.0
+cache/0/46/0/scale = 1.0
+cache/0/47/0/ascent = 0.0
+cache/0/47/0/descent = 0.0
+cache/0/47/0/underline_position = 0.0
+cache/0/47/0/underline_thickness = 0.0
+cache/0/47/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/49/0/ascent = 0.0
+cache/0/49/0/descent = 0.0
+cache/0/49/0/underline_position = 0.0
+cache/0/49/0/underline_thickness = 0.0
+cache/0/49/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/51/0/ascent = 0.0
+cache/0/51/0/descent = 0.0
+cache/0/51/0/underline_position = 0.0
+cache/0/51/0/underline_thickness = 0.0
+cache/0/51/0/scale = 1.0
+cache/0/52/0/ascent = 0.0
+cache/0/52/0/descent = 0.0
+cache/0/52/0/underline_position = 0.0
+cache/0/52/0/underline_thickness = 0.0
+cache/0/52/0/scale = 1.0
+cache/0/53/0/ascent = 0.0
+cache/0/53/0/descent = 0.0
+cache/0/53/0/underline_position = 0.0
+cache/0/53/0/underline_thickness = 0.0
+cache/0/53/0/scale = 1.0
+cache/0/54/0/ascent = 0.0
+cache/0/54/0/descent = 0.0
+cache/0/54/0/underline_position = 0.0
+cache/0/54/0/underline_thickness = 0.0
+cache/0/54/0/scale = 1.0
+cache/0/55/0/ascent = 0.0
+cache/0/55/0/descent = 0.0
+cache/0/55/0/underline_position = 0.0
+cache/0/55/0/underline_thickness = 0.0
+cache/0/55/0/scale = 1.0
+cache/0/56/0/ascent = 0.0
+cache/0/56/0/descent = 0.0
+cache/0/56/0/underline_position = 0.0
+cache/0/56/0/underline_thickness = 0.0
+cache/0/56/0/scale = 1.0
+cache/0/57/0/ascent = 0.0
+cache/0/57/0/descent = 0.0
+cache/0/57/0/underline_position = 0.0
+cache/0/57/0/underline_thickness = 0.0
+cache/0/57/0/scale = 1.0
+cache/0/58/0/ascent = 0.0
+cache/0/58/0/descent = 0.0
+cache/0/58/0/underline_position = 0.0
+cache/0/58/0/underline_thickness = 0.0
+cache/0/58/0/scale = 1.0
+cache/0/59/0/ascent = 0.0
+cache/0/59/0/descent = 0.0
+cache/0/59/0/underline_position = 0.0
+cache/0/59/0/underline_thickness = 0.0
+cache/0/59/0/scale = 1.0
+cache/0/150/0/ascent = 0.0
+cache/0/150/0/descent = 0.0
+cache/0/150/0/underline_position = 0.0
+cache/0/150/0/underline_thickness = 0.0
+cache/0/150/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/101/0/ascent = 0.0
+cache/0/101/0/descent = 0.0
+cache/0/101/0/underline_position = 0.0
+cache/0/101/0/underline_thickness = 0.0
+cache/0/101/0/scale = 1.0
+cache/0/102/0/ascent = 0.0
+cache/0/102/0/descent = 0.0
+cache/0/102/0/underline_position = 0.0
+cache/0/102/0/underline_thickness = 0.0
+cache/0/102/0/scale = 1.0
+cache/0/103/0/ascent = 0.0
+cache/0/103/0/descent = 0.0
+cache/0/103/0/underline_position = 0.0
+cache/0/103/0/underline_thickness = 0.0
+cache/0/103/0/scale = 1.0
+cache/0/104/0/ascent = 0.0
+cache/0/104/0/descent = 0.0
+cache/0/104/0/underline_position = 0.0
+cache/0/104/0/underline_thickness = 0.0
+cache/0/104/0/scale = 1.0
+cache/0/105/0/ascent = 0.0
+cache/0/105/0/descent = 0.0
+cache/0/105/0/underline_position = 0.0
+cache/0/105/0/underline_thickness = 0.0
+cache/0/105/0/scale = 1.0
+cache/0/106/0/ascent = 0.0
+cache/0/106/0/descent = 0.0
+cache/0/106/0/underline_position = 0.0
+cache/0/106/0/underline_thickness = 0.0
+cache/0/106/0/scale = 1.0
+cache/0/107/0/ascent = 0.0
+cache/0/107/0/descent = 0.0
+cache/0/107/0/underline_position = 0.0
+cache/0/107/0/underline_thickness = 0.0
+cache/0/107/0/scale = 1.0
+cache/0/108/0/ascent = 0.0
+cache/0/108/0/descent = 0.0
+cache/0/108/0/underline_position = 0.0
+cache/0/108/0/underline_thickness = 0.0
+cache/0/108/0/scale = 1.0
+cache/0/109/0/ascent = 0.0
+cache/0/109/0/descent = 0.0
+cache/0/109/0/underline_position = 0.0
+cache/0/109/0/underline_thickness = 0.0
+cache/0/109/0/scale = 1.0
+cache/0/110/0/ascent = 0.0
+cache/0/110/0/descent = 0.0
+cache/0/110/0/underline_position = 0.0
+cache/0/110/0/underline_thickness = 0.0
+cache/0/110/0/scale = 1.0
+cache/0/111/0/ascent = 0.0
+cache/0/111/0/descent = 0.0
+cache/0/111/0/underline_position = 0.0
+cache/0/111/0/underline_thickness = 0.0
+cache/0/111/0/scale = 1.0
+cache/0/112/0/ascent = 0.0
+cache/0/112/0/descent = 0.0
+cache/0/112/0/underline_position = 0.0
+cache/0/112/0/underline_thickness = 0.0
+cache/0/112/0/scale = 1.0
+cache/0/113/0/ascent = 0.0
+cache/0/113/0/descent = 0.0
+cache/0/113/0/underline_position = 0.0
+cache/0/113/0/underline_thickness = 0.0
+cache/0/113/0/scale = 1.0
+cache/0/114/0/ascent = 0.0
+cache/0/114/0/descent = 0.0
+cache/0/114/0/underline_position = 0.0
+cache/0/114/0/underline_thickness = 0.0
+cache/0/114/0/scale = 1.0
+cache/0/115/0/ascent = 0.0
+cache/0/115/0/descent = 0.0
+cache/0/115/0/underline_position = 0.0
+cache/0/115/0/underline_thickness = 0.0
+cache/0/115/0/scale = 1.0
+cache/0/116/0/ascent = 0.0
+cache/0/116/0/descent = 0.0
+cache/0/116/0/underline_position = 0.0
+cache/0/116/0/underline_thickness = 0.0
+cache/0/116/0/scale = 1.0
+cache/0/117/0/ascent = 0.0
+cache/0/117/0/descent = 0.0
+cache/0/117/0/underline_position = 0.0
+cache/0/117/0/underline_thickness = 0.0
+cache/0/117/0/scale = 1.0
+cache/0/118/0/ascent = 0.0
+cache/0/118/0/descent = 0.0
+cache/0/118/0/underline_position = 0.0
+cache/0/118/0/underline_thickness = 0.0
+cache/0/118/0/scale = 1.0
+cache/0/119/0/ascent = 0.0
+cache/0/119/0/descent = 0.0
+cache/0/119/0/underline_position = 0.0
+cache/0/119/0/underline_thickness = 0.0
+cache/0/119/0/scale = 1.0
+
 [node name="Main" type="Node3D" unique_id=253992802]
 
 [node name="Mapa" parent="." unique_id=2144173280 instance=ExtResource("1_lquwl")]
@@ -52,9 +327,11 @@ projection = 1
 size = 10.0
 script = ExtResource("1_h2yge")
 objetivo = NodePath("../Personaje")
+margen_zona = 0.75
+fov_zona = 70.0
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241 groups=["jugador"]]
-transform = Transform3D(-0.9879301, 0, -0.15490007, 0, 1, 0, 0.15490007, 0, -0.9879301, -51.029316, 6, 0)
+transform = Transform3D(-0.9879301, 0, -0.15490007, 0, 1, 0, 0.15490007, 0, -0.9879301, -79.78424, 12.947765, 0)
 axis_lock_linear_z = true
 script = ExtResource("1_pj")
 rango_ataque_jugador = 2.0
@@ -68,13 +345,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("Capsula")
 
 [node name="Aura" type="OmniLight3D" parent="Personaje" unique_id=1939269981]
-transform = Transform3D(1.0000001, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 1.0000001, -0.14299393, 2.456852, -5.0527105)
+transform = Transform3D(1.0000001, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 1.0000001, -0.7342377, 1.6321898, -0.31632233)
 visible = false
-omni_range = 60.0
-omni_attenuation = -0.705
+light_color = Color(0.90032524, 0.49266684, 0.36947015, 1)
+omni_range = 7.656
+omni_attenuation = -0.507
+
+[node name="Salud" type="Node" parent="Personaje" unique_id=1387222196]
+script = ExtResource("9_kek77")
+vida_maxima = 5
 
 [node name="Gladiador" type="CharacterBody3D" parent="." unique_id=330379699 groups=["enemigos"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.796646, 6.9993725, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.796646, 1.9000177, 0)
 axis_lock_linear_z = true
 script = ExtResource("7_5vw27")
 
@@ -85,17 +367,63 @@ shape = SubResource("CapsuleShape3D_4kxuq")
 [node name="Modelo" parent="Gladiador" unique_id=933404968 instance=ExtResource("8_kek77")]
 transform = Transform3D(-2.6, 0, -2.2729921e-07, 0, 2.6, 0, 2.2729921e-07, 0, -2.6, 0, 0, 0)
 
-[node name="Salud" type="Node" parent="." unique_id=1387222196]
-script = ExtResource("9_kek77")
-
 [node name="Area3D" type="Area3D" parent="." unique_id=1527612261 node_paths=PackedStringArray("luz_exterior", "world_environment")]
 script = ExtResource("10_4c57u")
 luz_exterior = NodePath("../DirectionalLight3D")
 world_environment = NodePath("../WorldEnvironment")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1543570440]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6095095, 7.258193, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6095095, 5.471424, 0)
 shape = SubResource("BoxShape3D_hchaj")
+
+[node name="CamaraArenaGladia" type="Area3D" parent="." unique_id=1901204382 node_paths=PackedStringArray("camara")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -86.05174, -1.7690916, 0)
+script = ExtResource("11_efxa6")
+camara = NodePath("../Camera3D")
+nombre_zona = "Arena de Gladiadores"
+es_zona_inicial = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CamaraArenaGladia" unique_id=1489465709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.910965, 2.5685425, -0.23718262)
+shape = SubResource("BoxShape3D_mti6b")
+
+[node name="CeldaCamara" type="Area3D" parent="." unique_id=830551714 node_paths=PackedStringArray("camara")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.70182, 1.4863853, 0)
+script = ExtResource("11_efxa6")
+camara = NodePath("../Camera3D")
+nombre_zona = "Celda"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CeldaCamara" unique_id=779283646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.194168, 6.412344, 0)
+shape = SubResource("BoxShape3D_mm1bc")
+
+[node name="CamaraCampamento" type="Area3D" parent="." unique_id=305248963 node_paths=PackedStringArray("camara")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.50558, -49.160053, 0)
+script = ExtResource("11_efxa6")
+camara = NodePath("../Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CamaraCampamento" unique_id=1908253776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.90428, 14.304199, 0)
+shape = SubResource("BoxShape3D_62yky")
+
+[node name="Rhaxos" type="Area3D" parent="." unique_id=74839649 node_paths=PackedStringArray("camara")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -138.28334, -46.149307, 0)
+script = ExtResource("11_efxa6")
+camara = NodePath("../Camera3D")
+nombre_zona = "Rhaxos"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rhaxos" unique_id=475935867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.182098, 8.430542, 0)
+shape = SubResource("BoxShape3D_qwqyf")
+
+[node name="Pendiente" type="Label3D" parent="." unique_id=1089793128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.418144, -43.607586, -3.3121338)
+text = "Pendiente Cartógrafo"
+font = SubResource("FontFile_qe4n8")
+font_size = 119
+
+[node name="HUD" parent="." unique_id=460007701 instance=ExtResource("12_dg77c")]
+personaje = NodePath("../Personaje/Salud")
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]

@@ -3,6 +3,7 @@ extends CharacterBody3D
 enum Estado { QUIETO, CAMINAR, AIRE }
 const RUIDO = [0.0, 2.0, 0.0]   # metros, en el mismo orden del enum
 
+@onready var salud = $Salud
 @export var speed = 6.0
 @export var tiempo_arranque = 0.15
 @export var gravedad = 30.0
@@ -42,6 +43,9 @@ func _physics_process(delta):
 	else:
 		coyote -= delta
 		velocity.y -= gravedad * delta
+		
+	if Input.is_action_just_pressed("curarse"):
+		salud.curarse()
 
 	# Salto (permitido mientras coyote > 0)
 	if Input.is_action_just_pressed("saltar") and coyote > 0:
