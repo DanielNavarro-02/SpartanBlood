@@ -12,6 +12,7 @@ var visitada = false
 
 
 func _ready():
+	add_to_group("zonas")
 	body_entered.connect(_on_body_entered)
 	if es_zona_inicial:
 		# Se marca como visitada ya, para que no se repita cuando el jugador

@@ -14,6 +14,9 @@ class_name CamaraSeguidora   # permite que otros scripts "vean" esta cámara por
 @export var fov_zona = 75.0
 
 var presentando = false             # true mientras se muestra una zona
+var _sac_i := 0.0                   # sacudida: intensidad (metros), duración y tiempo restante
+var _sac_dur := 0.01
+var _sac_t := 0.0
 var etiqueta: Label                 # el texto con el nombre de la zona
 
 
@@ -40,6 +43,25 @@ func crear_interfaz():
 	etiqueta.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	etiqueta.modulate.a = 0.0       # empieza invisible
 	capa.add_child(etiqueta)
+
+
+# Sacudida de cámara (golpes, jefe). Usa h_offset/v_offset, no toca la posición de seguimiento.
+func sacudir(intensidad: float, dur: float = 0.2):
+	if intensidad >= _sac_i * (_sac_t / _sac_dur):
+		_sac_i = intensidad
+		_sac_dur = maxf(dur, 0.01)
+		_sac_t = _sac_dur
+
+
+func _process(delta):
+	if _sac_t > 0.0:
+		_sac_t = maxf(_sac_t - delta, 0.0)
+		var k = _sac_t / _sac_dur
+		h_offset = randf_range(-1.0, 1.0) * _sac_i * k
+		v_offset = randf_range(-1.0, 1.0) * _sac_i * k
+	elif h_offset != 0.0 or v_offset != 0.0:
+		h_offset = 0.0
+		v_offset = 0.0
 
 
 func _physics_process(delta):

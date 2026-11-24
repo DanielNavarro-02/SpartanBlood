@@ -5,12 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://7dtiam5f8aie" path="res://mapa.tscn" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://bj0372xnq02wk" path="res://personaje.gd" id="1_pj"]
 [ext_resource type="PackedScene" uid="uid://chym0ujvy5ejg" path="res://slash.tscn" id="5_7mycd"]
-[ext_resource type="PackedScene" uid="uid://b4ro3qwlwn74t" path="res://personaje/Untitled.glb" id="6_4c57u"]
 [ext_resource type="Script" uid="uid://05xu15om4mv" path="res://gladiador.gd" id="7_5vw27"]
-[ext_resource type="PackedScene" uid="uid://52giffn4ww16" path="res://personaje/character-male-d.glb" id="8_kek77"]
 [ext_resource type="Script" uid="uid://co2ljkx4a026c" path="res://salud.gd" id="9_kek77"]
 [ext_resource type="Script" uid="uid://de8phwtkj1olr" path="res://area_3d.gd" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://b78p4aotkmc5s" path="res://zona_camara.gd" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://co0lp4xervh85" path="res://hud.tscn" id="12_dg77c"]
+
+[ext_resource type="Script" path="res://rig/rig_segmentado.gd" id="rig_gd"]
+[ext_resource type="Script" path="res://interfaz.gd" id="interfaz_gd"]
+[ext_resource type="Script" path="res://npc_herrero.gd" id="npc_gd"]
+[ext_resource type="Script" path="res://rhaxos.gd" id="rhaxos_gd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rhaxos"]
+size = Vector3(3.2, 6.5, 2)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_escvc"]
 panorama = ExtResource("1_1bvp3")
@@ -330,14 +337,15 @@ margen_zona = 0.75
 fov_zona = 70.0
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241 groups=["jugador"]]
-transform = Transform3D(-0.9879301, 0, -0.15490007, 0, 1, 0, 0.15490007, 0, -0.9879301, -79.78424, 12.947765, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.78424, 12.947765, 0)
 axis_lock_linear_z = true
 script = ExtResource("1_pj")
 rango_ataque_jugador = 2.0
 slash_scene = ExtResource("5_7mycd")
 
-[node name="Modelo" parent="Personaje" unique_id=808733841 instance=ExtResource("6_4c57u")]
-transform = Transform3D(-2.5686183, 0, 0.40274018, 0, 2.6, 0, -0.40274018, 0, -2.5686183, 0, 0.08197212, 0)
+[node name="Rig" type="Node3D" parent="Personaje"]
+script = ExtResource("rig_gd")
+datos = "res://rig/datos/espartano.json"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Personaje" unique_id=394902781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
@@ -350,6 +358,10 @@ light_color = Color(0.90032524, 0.49266684, 0.36947015, 1)
 omni_range = 7.656
 omni_attenuation = -0.507
 
+[node name="Salud" type="Node" parent="Personaje" unique_id=1387222196]
+script = ExtResource("9_kek77")
+vida_maxima = 5
+
 [node name="Gladiador" type="CharacterBody3D" parent="." unique_id=330379699 groups=["enemigos"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.796646, 1.9000177, 0)
 axis_lock_linear_z = true
@@ -359,11 +371,9 @@ script = ExtResource("7_5vw27")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_4kxuq")
 
-[node name="Modelo" parent="Gladiador" unique_id=933404968 instance=ExtResource("8_kek77")]
-transform = Transform3D(-2.6, 0, -2.2729921e-07, 0, 2.6, 0, 2.2729921e-07, 0, -2.6, 0, 0, 0)
-
-[node name="Salud" type="Node" parent="." unique_id=1387222196]
-script = ExtResource("9_kek77")
+[node name="Rig" type="Node3D" parent="Gladiador"]
+script = ExtResource("rig_gd")
+datos = "res://rig/datos/esqueleto.json"
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1527612261 node_paths=PackedStringArray("luz_exterior", "world_environment")]
 script = ExtResource("10_4c57u")
@@ -414,11 +424,59 @@ nombre_zona = "Rhaxos"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.182098, 8.430542, 0)
 shape = SubResource("BoxShape3D_qwqyf")
 
-[node name="Pendiente" type="Label3D" parent="." unique_id=1089793128]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.418144, -43.607586, -3.3121338)
-text = "Pendiente Cartógrafo"
-font = SubResource("FontFile_qe4n8")
-font_size = 119
+
+[node name="Gladiador2" type="CharacterBody3D" parent="." groups=["enemigos"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.0, 2.4, 0)
+axis_lock_linear_z = true
+script = ExtResource("7_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gladiador2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[node name="Rig" type="Node3D" parent="Gladiador2"]
+script = ExtResource("rig_gd")
+datos = "res://rig/datos/esqueleto.json"
+
+[node name="Gladiador3" type="CharacterBody3D" parent="." groups=["enemigos"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0, 2.4, 0)
+axis_lock_linear_z = true
+script = ExtResource("7_5vw27")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gladiador3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[node name="Rig" type="Node3D" parent="Gladiador3"]
+script = ExtResource("rig_gd")
+datos = "res://rig/datos/esqueleto.json"
+
+[node name="NPCHerrero" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5, -47, -1.5)
+script = ExtResource("npc_gd")
+
+[node name="Rig" type="Node3D" parent="NPCHerrero"]
+script = ExtResource("rig_gd")
+datos = "res://rig/datos/herrero.json"
+
+[node name="JefeRhaxos" type="CharacterBody3D" parent="." groups=["enemigos"]]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -116, -45, 0)
+axis_lock_linear_z = true
+script = ExtResource("rhaxos_gd")
+
+[node name="Rig" type="Node3D" parent="JefeRhaxos"]
+script = ExtResource("rig_gd")
+datos = "res://rig/datos/rhaxos.json"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="JefeRhaxos"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, 0)
+shape = SubResource("BoxShape3D_rhaxos")
+
+[node name="Interfaz" type="CanvasLayer" parent="."]
+script = ExtResource("interfaz_gd")
+
+[node name="HUD" parent="." unique_id=460007701 instance=ExtResource("12_dg77c")]
+personaje = NodePath("../Personaje/Salud")
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]
