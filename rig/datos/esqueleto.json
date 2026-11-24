@@ -1,0 +1,1212 @@
+{
+ "modelo": "enemigo_esqueleto_body.fbx",
+ "frente": "EyeHoles",
+ "altura": 2.5,
+ "arma": {
+  "escena": "enemigo_esqueleto_espada_gladius.fbx",
+  "mano": "brazo_a",
+  "brazo_ref": "Arm_R",
+  "largo": 0.88,
+  "inclinacion": 12
+ },
+ "lados": {
+  "brazo": [
+   "brazo_L",
+   "brazo_R"
+  ],
+  "pierna": [
+   "pierna_L",
+   "pierna_R"
+  ]
+ },
+ "pivotes": [
+  {
+   "id": "cadera",
+   "ancla": [
+    "Belt",
+    "c"
+   ],
+   "partes": [
+    "Pelvis",
+    "Loincloth",
+    "Belt",
+    "Phalerae"
+   ]
+  },
+  {
+   "id": "torso",
+   "padre": "cadera",
+   "ancla": [
+    "Belt",
+    "c"
+   ],
+   "partes": [
+    "Spine",
+    "Ribcage",
+    "VoidCore",
+    "CorruptionOrb",
+    "CorruptionThorns",
+    "NeckBones",
+    "CloakMantle"
+   ]
+  },
+  {
+   "id": "cabeza",
+   "padre": "torso",
+   "ancla": [
+    "NeckBones",
+    "c"
+   ],
+   "partes": [
+    "Skull",
+    "Teeth",
+    "MouthDark",
+    "EyeHoles",
+    "EyeGlow",
+    "Helmet"
+   ]
+  },
+  {
+   "id": "mandibula",
+   "padre": "cabeza",
+   "ancla": [
+    "Jaw",
+    "t"
+   ],
+   "partes": [
+    "Jaw"
+   ]
+  },
+  {
+   "id": "cresta",
+   "padre": "cabeza",
+   "ancla": [
+    "HelmetCrest",
+    "b"
+   ],
+   "partes": [
+    "HelmetCrest"
+   ]
+  },
+  {
+   "id": "capa",
+   "padre": "torso",
+   "ancla": [
+    "Cloak",
+    "tz"
+   ],
+   "partes": [
+    "Cloak"
+   ]
+  },
+  {
+   "id": "brazo_L",
+   "padre": "torso",
+   "ancla": [
+    "Arm_L",
+    "i"
+   ],
+   "colgar": true,
+   "espejo": true,
+   "partes": [
+    "Arm_L"
+   ],
+   "fijas": [
+    "Galerus"
+   ]
+  },
+  {
+   "id": "brazo_R",
+   "padre": "torso",
+   "ancla": [
+    "Arm_R",
+    "i"
+   ],
+   "colgar": true,
+   "espejo": true,
+   "partes": [
+    "Arm_R",
+    "Manica"
+   ]
+  },
+  {
+   "id": "pierna_L",
+   "padre": "cadera",
+   "ancla": [
+    "Leg_L",
+    "t",
+    [
+     0,
+     -1.5,
+     0
+    ]
+   ],
+   "espejo": true,
+   "partes": [
+    "Leg_L"
+   ]
+  },
+  {
+   "id": "pierna_R",
+   "padre": "cadera",
+   "ancla": [
+    "Leg_R",
+    "t",
+    [
+     0,
+     -1.5,
+     0
+    ]
+   ],
+   "espejo": true,
+   "partes": [
+    "Leg_R",
+    "Greave_R"
+   ]
+  }
+ ],
+ "clips": {
+  "idle": {
+   "dur": 2.0,
+   "loop": true,
+   "keys": [
+    {
+     "t": 0,
+     "e": "s",
+     "p": {
+      "brazo_a": [
+       26,
+       0,
+       4
+      ],
+      "brazo_b": [
+       -6,
+       0,
+       6
+      ],
+      "torso": [
+       -4,
+       0,
+       0
+      ],
+      "cabeza": [
+       4,
+       0,
+       0
+      ],
+      "pierna_a": [
+       5,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -5,
+       0,
+       3
+      ],
+      "capa": [
+       -1.5,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   ],
+   "osc": [
+    [
+     "cadera_p",
+     1,
+     0.5,
+     1,
+     0,
+     0
+    ],
+    [
+     "torso",
+     0,
+     2,
+     1,
+     0.1,
+     0
+    ],
+    [
+     "cabeza",
+     1,
+     8,
+     1,
+     0.3,
+     0
+    ],
+    [
+     "cabeza",
+     2,
+     3,
+     2,
+     0.0,
+     0
+    ],
+    [
+     "mandibula",
+     0,
+     -6,
+     3,
+     0,
+     -6
+    ],
+    [
+     "brazo_b",
+     0,
+     3,
+     1,
+     0.2,
+     0
+    ],
+    [
+     "capa",
+     0,
+     1.0,
+     1,
+     0.3,
+     0.0
+    ],
+    [
+     "cresta",
+     0,
+     3,
+     1,
+     0.5,
+     0
+    ]
+   ]
+  },
+  "caminar": {
+   "dur": 0.9,
+   "loop": true,
+   "keys": [
+    {
+     "t": 0,
+     "e": "s",
+     "p": {
+      "torso": [
+       -9,
+       0,
+       0
+      ],
+      "cabeza": [
+       8,
+       0,
+       0
+      ],
+      "brazo_a": [
+       30,
+       0,
+       4
+      ],
+      "brazo_b": [
+       0,
+       0,
+       6
+      ],
+      "capa": [
+       -4.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   ],
+   "osc": [
+    [
+     "pierna_a",
+     0,
+     30,
+     1,
+     0,
+     0
+    ],
+    [
+     "pierna_b",
+     0,
+     30,
+     1,
+     0.5,
+     0
+    ],
+    [
+     "brazo_b",
+     0,
+     34,
+     1,
+     0,
+     0
+    ],
+    [
+     "brazo_a",
+     0,
+     8,
+     1,
+     0.5,
+     0
+    ],
+    [
+     "cadera_p",
+     1,
+     1.1,
+     2,
+     0.25,
+     0.4
+    ],
+    [
+     "torso",
+     1,
+     8,
+     1,
+     0,
+     0
+    ],
+    [
+     "cabeza",
+     1,
+     -6,
+     1,
+     0,
+     0
+    ],
+    [
+     "cabeza",
+     2,
+     4,
+     2,
+     0.1,
+     0
+    ],
+    [
+     "mandibula",
+     0,
+     -7,
+     2,
+     0,
+     -7
+    ],
+    [
+     "capa",
+     0,
+     2.0,
+     2,
+     0.1,
+     0.0
+    ],
+    [
+     "cresta",
+     0,
+     5,
+     2,
+     0.4,
+     0
+    ]
+   ]
+  },
+  "aviso": {
+   "dur": 0.5,
+   "loop": false,
+   "keys": [
+    {
+     "t": 0.0,
+     "e": "o",
+     "p": {
+      "brazo_a": [
+       26,
+       0,
+       4
+      ],
+      "brazo_b": [
+       -6,
+       0,
+       6
+      ],
+      "torso": [
+       -4,
+       0,
+       0
+      ],
+      "cabeza": [
+       4,
+       0,
+       0
+      ],
+      "pierna_a": [
+       5,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -5,
+       0,
+       3
+      ],
+      "capa": [
+       -1.5,
+       0.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "t": 0.45,
+     "e": "o",
+     "p": {
+      "brazo_a": [
+       135,
+       0,
+       8
+      ],
+      "brazo_b": [
+       -30,
+       0,
+       10
+      ],
+      "torso": [
+       10,
+       0,
+       0
+      ],
+      "cabeza": [
+       12,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -2,
+       0,
+       0
+      ],
+      "pierna_a": [
+       -12,
+       0,
+       3
+      ],
+      "pierna_b": [
+       14,
+       0,
+       3
+      ],
+      "mandibula": [
+       -26,
+       0,
+       0
+      ],
+      "capa": [
+       2.0,
+       0.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "t": 1.0,
+     "e": "l",
+     "p": {
+      "brazo_a": [
+       140,
+       0,
+       8
+      ],
+      "brazo_b": [
+       -30,
+       0,
+       10
+      ],
+      "torso": [
+       12,
+       0,
+       0
+      ],
+      "cabeza": [
+       14,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -2.5,
+       0,
+       0
+      ],
+      "pierna_a": [
+       -12,
+       0,
+       3
+      ],
+      "pierna_b": [
+       14,
+       0,
+       3
+      ],
+      "mandibula": [
+       -30,
+       0,
+       0
+      ],
+      "capa": [
+       3.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   ],
+   "osc": [
+    [
+     "brazo_a",
+     0,
+     3,
+     6,
+     0,
+     0
+    ],
+    [
+     "cabeza",
+     2,
+     3,
+     7,
+     0,
+     0
+    ]
+   ]
+  },
+  "golpe": {
+   "dur": 0.4,
+   "loop": false,
+   "keys": [
+    {
+     "t": 0.0,
+     "e": "i",
+     "p": {
+      "brazo_a": [
+       140,
+       0,
+       8
+      ],
+      "brazo_b": [
+       -30,
+       0,
+       10
+      ],
+      "torso": [
+       12,
+       0,
+       0
+      ],
+      "cabeza": [
+       14,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -2.5,
+       0,
+       0
+      ],
+      "pierna_a": [
+       -12,
+       0,
+       3
+      ],
+      "pierna_b": [
+       14,
+       0,
+       3
+      ],
+      "mandibula": [
+       -30,
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "t": 0.25,
+     "e": "o",
+     "p": {
+      "brazo_a": [
+       18,
+       0,
+       3
+      ],
+      "brazo_b": [
+       40,
+       0,
+       10
+      ],
+      "torso": [
+       -26,
+       0,
+       0
+      ],
+      "cabeza": [
+       16,
+       0,
+       0
+      ],
+      "cadera_p": [
+       5,
+       -2,
+       0
+      ],
+      "pierna_a": [
+       32,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -28,
+       0,
+       3
+      ],
+      "mandibula": [
+       -8,
+       0,
+       0
+      ],
+      "capa": [
+       -6.0,
+       0.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "t": 1.0,
+     "e": "s",
+     "p": {
+      "brazo_a": [
+       10,
+       0,
+       3
+      ],
+      "brazo_b": [
+       40,
+       0,
+       10
+      ],
+      "torso": [
+       -22,
+       0,
+       0
+      ],
+      "cabeza": [
+       12,
+       0,
+       0
+      ],
+      "cadera_p": [
+       5,
+       -2,
+       0
+      ],
+      "pierna_a": [
+       32,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -28,
+       0,
+       3
+      ],
+      "mandibula": [
+       -8,
+       0,
+       0
+      ],
+      "capa": [
+       -4.0,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   ],
+   "osc": []
+  },
+  "recarga": {
+   "dur": 1.0,
+   "loop": false,
+   "keys": [
+    {
+     "t": 0.0,
+     "e": "s",
+     "p": {
+      "brazo_a": [
+       10,
+       0,
+       3
+      ],
+      "brazo_b": [
+       40,
+       0,
+       10
+      ],
+      "torso": [
+       -22,
+       0,
+       0
+      ],
+      "cabeza": [
+       12,
+       0,
+       0
+      ],
+      "cadera_p": [
+       5,
+       -2,
+       0
+      ],
+      "pierna_a": [
+       32,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -28,
+       0,
+       3
+      ],
+      "mandibula": [
+       -8,
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "t": 0.5,
+     "e": "s",
+     "p": {
+      "brazo_a": [
+       26,
+       0,
+       4
+      ],
+      "brazo_b": [
+       -6,
+       0,
+       6
+      ],
+      "torso": [
+       -4,
+       0,
+       0
+      ],
+      "cabeza": [
+       4,
+       0,
+       0
+      ],
+      "pierna_a": [
+       5,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -5,
+       0,
+       3
+      ],
+      "capa": [
+       -1.5,
+       0.0,
+       0.0
+      ]
+     }
+    }
+   ],
+   "osc": [
+    [
+     "mandibula",
+     0,
+     -6,
+     3,
+     0,
+     -6
+    ]
+   ]
+  },
+  "dano": {
+   "dur": 0.3,
+   "loop": false,
+   "keys": [
+    {
+     "t": 0.0,
+     "e": "o",
+     "p": {
+      "brazo_a": [
+       26,
+       0,
+       4
+      ],
+      "brazo_b": [
+       -6,
+       0,
+       6
+      ],
+      "torso": [
+       -4,
+       0,
+       0
+      ],
+      "cabeza": [
+       4,
+       0,
+       0
+      ],
+      "pierna_a": [
+       5,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -5,
+       0,
+       3
+      ],
+      "capa": [
+       -1.5,
+       0.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "t": 0.3,
+     "e": "o",
+     "p": {
+      "torso": [
+       26,
+       0,
+       0
+      ],
+      "cabeza": [
+       28,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -3.5,
+       -1.5,
+       0
+      ],
+      "brazo_a": [
+       70,
+       0,
+       20
+      ],
+      "brazo_b": [
+       -50,
+       0,
+       24
+      ],
+      "pierna_a": [
+       -14,
+       0,
+       4
+      ],
+      "pierna_b": [
+       14,
+       0,
+       4
+      ],
+      "mandibula": [
+       -34,
+       0,
+       0
+      ],
+      "capa": [
+       7.0,
+       0.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "t": 1.0,
+     "e": "s",
+     "p": {
+      "torso": [
+       20,
+       0,
+       0
+      ],
+      "cabeza": [
+       20,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -3,
+       -1,
+       0
+      ],
+      "brazo_a": [
+       60,
+       0,
+       18
+      ],
+      "brazo_b": [
+       -40,
+       0,
+       20
+      ],
+      "pierna_a": [
+       -10,
+       0,
+       4
+      ],
+      "pierna_b": [
+       10,
+       0,
+       4
+      ],
+      "mandibula": [
+       -28,
+       0,
+       0
+      ]
+     }
+    }
+   ],
+   "osc": []
+  },
+  "muerte": {
+   "dur": 1.1,
+   "loop": false,
+   "keys": [
+    {
+     "t": 0.0,
+     "e": "o",
+     "p": {
+      "brazo_a": [
+       26,
+       0,
+       4
+      ],
+      "brazo_b": [
+       -6,
+       0,
+       6
+      ],
+      "torso": [
+       -4,
+       0,
+       0
+      ],
+      "cabeza": [
+       4,
+       0,
+       0
+      ],
+      "pierna_a": [
+       5,
+       0,
+       3
+      ],
+      "pierna_b": [
+       -5,
+       0,
+       3
+      ],
+      "capa": [
+       -1.5,
+       0.0,
+       0.0
+      ]
+     }
+    },
+    {
+     "t": 0.18,
+     "e": "o",
+     "p": {
+      "torso": [
+       28,
+       0,
+       0
+      ],
+      "cabeza": [
+       30,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -3,
+       -1,
+       0
+      ],
+      "brazo_a": [
+       70,
+       0,
+       22
+      ],
+      "brazo_b": [
+       -50,
+       0,
+       24
+      ],
+      "mandibula": [
+       -38,
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "t": 0.5,
+     "e": "i",
+     "p": {
+      "cadera": [
+       40,
+       0,
+       0
+      ],
+      "torso": [
+       10,
+       0,
+       0
+      ],
+      "cabeza": [
+       20,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -14,
+       -3,
+       0
+      ],
+      "brazo_a": [
+       80,
+       0,
+       36
+      ],
+      "brazo_b": [
+       50,
+       0,
+       34
+      ],
+      "pierna_a": [
+       30,
+       0,
+       6
+      ],
+      "pierna_b": [
+       10,
+       0,
+       6
+      ],
+      "mandibula": [
+       -40,
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "t": 0.7,
+     "e": "o",
+     "p": {
+      "cadera": [
+       88,
+       0,
+       0
+      ],
+      "torso": [
+       2,
+       0,
+       0
+      ],
+      "cabeza": [
+       0,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -26,
+       -8,
+       0
+      ],
+      "brazo_a": [
+       85,
+       0,
+       44
+      ],
+      "brazo_b": [
+       60,
+       0,
+       44
+      ],
+      "pierna_a": [
+       10,
+       0,
+       8
+      ],
+      "pierna_b": [
+       -4,
+       0,
+       8
+      ],
+      "mandibula": [
+       -40,
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "t": 1.0,
+     "e": "s",
+     "p": {
+      "cadera": [
+       90,
+       0,
+       0
+      ],
+      "torso": [
+       0,
+       0,
+       0
+      ],
+      "cadera_p": [
+       -26,
+       -9,
+       0
+      ],
+      "brazo_a": [
+       88,
+       0,
+       48
+      ],
+      "brazo_b": [
+       70,
+       0,
+       48
+      ],
+      "pierna_a": [
+       8,
+       0,
+       8
+      ],
+      "pierna_b": [
+       -4,
+       0,
+       8
+      ],
+      "mandibula": [
+       -40,
+       0,
+       0
+      ]
+     }
+    }
+   ],
+   "osc": []
+  }
+ }
+}
