@@ -1,6 +1,7 @@
-res://mapa.tscn
-res://piezas/biblioteca_roca.tres
-res://mapa.gdshader
 res://main.tscn
-res://fuego.gd
+res://piezas/biblioteca_roca.tres
 res://piezas/material_roca.tres
+res://camera_3d.gd
+res://zona_camara.gd
+res://reja.gd
+res://director_oleadas.gd

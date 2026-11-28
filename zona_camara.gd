@@ -1,11 +1,15 @@
 extends Area3D
 class_name ZonaCamara
 
-@export var camara: CamaraSeguidora          # arrastra aquí tu cámara
-@export var nombre_zona = "Campamento Subterráneo"       # el texto que se muestra
+# Variable "static": pertenece al script y no a un nodo, por eso NO se borra
+# cuando la escena se reinicia. Sirve para recordar que la presentación ya se vio.
+static var intro_inicial_vista: bool = false
+
+@export var camara: CamaraSeguidora
+@export var nombre_zona = "Nueva zona"
 @export var segundos_mostrando = 3.0
-@export var es_zona_inicial = false          # márcalo SOLO en la Arena de Gladiadores
-@export var una_sola_vez = true              # si es false, se repite cada vez que entres
+@export var es_zona_inicial = false
+@export var una_sola_vez = true
 
 var visitada = false
 @onready var forma: CollisionShape3D = $CollisionShape3D
@@ -14,11 +18,12 @@ var visitada = false
 func _ready():
 	body_entered.connect(_on_body_entered)
 	if es_zona_inicial:
-		# Se marca como visitada ya, para que no se repita cuando el jugador
-		# (que nace dentro de la zona) active la señal de entrada.
 		visitada = true
-		# Pequeña espera para que la escena termine de cargar
+		# Si la escena se reinició (el jugador murió), no se repite la presentación
+		if intro_inicial_vista:
+			return
 		await get_tree().create_timer(0.3).timeout
+		intro_inicial_vista = true
 		presentar()
 
 

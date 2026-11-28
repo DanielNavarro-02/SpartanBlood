@@ -1,6 +1,8 @@
 extends Camera3D
 class_name CamaraSeguidora   # permite que otros scripts "vean" esta cámara por su nombre
 
+signal presentacion_terminada   # avisa cuando la cámara ya terminó de mostrar una zona
+
 @export var objetivo: Node3D
 @export var distancia = Vector3(0, 5, 12)
 @export var suavizado = 5.0
@@ -14,6 +16,9 @@ class_name CamaraSeguidora   # permite que otros scripts "vean" esta cámara por
 @export var fov_zona = 75.0
 
 var presentando = false             # true mientras se muestra una zona
+var _sac_i := 0.0                   # sacudida: intensidad (metros), duración y tiempo restante
+var _sac_dur := 0.01
+var _sac_t := 0.0
 var etiqueta: Label                 # el texto con el nombre de la zona
 
 
@@ -40,6 +45,25 @@ func crear_interfaz():
 	etiqueta.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	etiqueta.modulate.a = 0.0       # empieza invisible
 	capa.add_child(etiqueta)
+
+
+# Sacudida de cámara (golpes, jefe). Usa h_offset/v_offset, no toca la posición de seguimiento.
+func sacudir(intensidad: float, dur: float = 0.2):
+	if intensidad >= _sac_i * (_sac_t / _sac_dur):
+		_sac_i = intensidad
+		_sac_dur = maxf(dur, 0.01)
+		_sac_t = _sac_dur
+
+
+func _process(delta):
+	if _sac_t > 0.0:
+		_sac_t = maxf(_sac_t - delta, 0.0)
+		var k = _sac_t / _sac_dur
+		h_offset = randf_range(-1.0, 1.0) * _sac_i * k
+		v_offset = randf_range(-1.0, 1.0) * _sac_i * k
+	elif h_offset != 0.0 or v_offset != 0.0:
+		h_offset = 0.0
+		v_offset = 0.0
 
 
 func _physics_process(delta):
@@ -119,9 +143,36 @@ func mostrar_zona(centro: Vector3, tamano: Vector3, nombre: String, segundos: fl
 	t.parallel().tween_property(self, propiedad, valor_original, tiempo_regreso)
 	t.tween_callback(terminar_presentacion)
 
+# Lleva la cámara hasta un punto, ejecuta una acción al llegar (por ejemplo abrir
+# la reja), se queda mirando unos segundos y vuelve al jugador.
+func mostrar_punto(punto: Vector3, accion: Callable, segundos_mirando: float = 3.0):
+	# Si la cámara ya está ocupada, no se hace la toma pero la acción sí se ejecuta,
+	# para que la reja nunca se quede cerrada por error.
+	if presentando:
+		accion.call()
+		return
+	presentando = true
+	get_tree().paused = true   # congela al jugador mientras dura la toma
 
-# Se llama al final: reanuda el juego y la cámara vuelve a seguir al jugador.
+	var destino_punto = punto + distancia                        # así queda el punto centrado
+	var destino_vuelta = objetivo.global_position + distancia    # dónde está Kael
+
+	var t = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	# 1) Viaja hasta el punto
+	t.tween_property(self, "global_position", destino_punto, tiempo_viaje)
+	# 2) Al llegar ejecuta la acción (abrir la reja)
+	t.tween_callback(accion)
+	# 3) Se queda mirando mientras pasa lo que tiene que pasar
+	t.tween_interval(segundos_mirando)
+	# 4) Regresa al jugador y termina
+	t.tween_property(self, "global_position", destino_vuelta, tiempo_regreso)
+	t.tween_callback(terminar_presentacion)
+
+
+# Se llama al final: reanuda el juego, la cámara vuelve a seguir al jugador y avisa.
 func terminar_presentacion():
 	presentando = false
 	get_tree().paused = false
+	presentacion_terminada.emit()
 	

@@ -1,0 +1,358 @@
+{
+ "modelo": "npc_herrero_body_sin_arma.fbx",
+ "frente": "Eyes",
+ "altura": 2.4,
+ "lados": {
+  "brazo": [
+   "brazo_L",
+   "brazo_R"
+  ],
+  "pierna": [
+   "pierna_L",
+   "pierna_R"
+  ]
+ },
+ "pivotes": [
+  {
+   "id": "cadera",
+   "ancla": [
+    "BeltBuckle",
+    "c"
+   ],
+   "partes": [
+    "TunicSkirt"
+   ]
+  },
+  {
+   "id": "torso",
+   "padre": "cadera",
+   "ancla": [
+    "BeltBuckle",
+    "c"
+   ],
+   "partes": [
+    "Tunic_Body",
+    "Neck",
+    "Apron",
+    "ApronStitch",
+    "BeltBuckle",
+    "Mantle",
+    "HammerHandle",
+    "HammerHead"
+   ]
+  },
+  {
+   "id": "cabeza",
+   "padre": "torso",
+   "ancla": [
+    "Neck",
+    "c"
+   ],
+   "partes": [
+    "Head",
+    "Eyes",
+    "EyeShine",
+    "Hair",
+    "Beard",
+    "Headband"
+   ]
+  },
+  {
+   "id": "capa",
+   "padre": "torso",
+   "ancla": [
+    "ShortCloak",
+    "tz"
+   ],
+   "partes": [
+    "ShortCloak"
+   ]
+  },
+  {
+   "id": "brazo_L",
+   "padre": "torso",
+   "ancla": [
+    "Sleeve_L",
+    "i"
+   ],
+   "colgar": true,
+   "espejo": true,
+   "partes": [
+    "Sleeve_L",
+    "Forearm_L",
+    "Glove_L"
+   ],
+   "fijas": [
+    "Pauldron"
+   ]
+  },
+  {
+   "id": "brazo_R",
+   "padre": "torso",
+   "ancla": [
+    "Sleeve_R",
+    "i"
+   ],
+   "colgar": true,
+   "espejo": true,
+   "partes": [
+    "Sleeve_R",
+    "Forearm_R",
+    "Glove_R"
+   ]
+  },
+  {
+   "id": "pierna_L",
+   "padre": "cadera",
+   "ancla": [
+    "Leg_L",
+    "t",
+    [
+     0,
+     -1.5,
+     0
+    ]
+   ],
+   "espejo": true,
+   "partes": [
+    "Leg_L",
+    "Sandal_L"
+   ]
+  },
+  {
+   "id": "pierna_R",
+   "padre": "cadera",
+   "ancla": [
+    "Leg_R",
+    "t",
+    [
+     0,
+     -1.5,
+     0
+    ]
+   ],
+   "espejo": true,
+   "partes": [
+    "Leg_R",
+    "Sandal_R"
+   ]
+  }
+ ],
+ "clips": {
+  "idle": {
+   "dur": 3.0,
+   "loop": true,
+   "keys": [
+    {
+     "t": 0,
+     "e": "s",
+     "p": {
+      "brazo_a": [
+       4,
+       0,
+       5
+      ],
+      "brazo_b": [
+       4,
+       0,
+       5
+      ]
+     }
+    }
+   ],
+   "osc": [
+    [
+     "cadera_p",
+     1,
+     0.5,
+     1,
+     0,
+     0
+    ],
+    [
+     "torso",
+     0,
+     1.5,
+     1,
+     0.1,
+     0
+    ],
+    [
+     "cabeza",
+     0,
+     2,
+     1,
+     0.3,
+     0
+    ],
+    [
+     "cabeza",
+     1,
+     6,
+     1,
+     0,
+     0
+    ],
+    [
+     "brazo_a",
+     0,
+     2,
+     1,
+     0.2,
+     0
+    ],
+    [
+     "brazo_b",
+     0,
+     2,
+     1,
+     0.25,
+     0
+    ],
+    [
+     "capa",
+     0,
+     1.5,
+     1,
+     0.4,
+     0
+    ]
+   ]
+  },
+  "hablar": {
+   "dur": 2.0,
+   "loop": true,
+   "keys": [
+    {
+     "t": 0,
+     "e": "s",
+     "p": {
+      "brazo_a": [
+       50,
+       0,
+       8
+      ],
+      "brazo_b": [
+       8,
+       0,
+       6
+      ],
+      "torso": [
+       -3,
+       0,
+       0
+      ]
+     }
+    }
+   ],
+   "osc": [
+    [
+     "cadera_p",
+     1,
+     0.5,
+     1,
+     0,
+     0
+    ],
+    [
+     "brazo_a",
+     0,
+     16,
+     2,
+     0,
+     0
+    ],
+    [
+     "cabeza",
+     0,
+     5,
+     2,
+     0.25,
+     0
+    ],
+    [
+     "cabeza",
+     1,
+     3,
+     1,
+     0,
+     0
+    ],
+    [
+     "brazo_b",
+     0,
+     3,
+     1,
+     0.3,
+     0
+    ],
+    [
+     "capa",
+     0,
+     1.5,
+     1,
+     0.4,
+     0
+    ]
+   ]
+  },
+  "saludo": {
+   "dur": 1.2,
+   "loop": true,
+   "keys": [
+    {
+     "t": 0,
+     "e": "s",
+     "p": {
+      "brazo_a": [
+       150,
+       0,
+       6
+      ],
+      "brazo_b": [
+       4,
+       0,
+       5
+      ],
+      "torso": [
+       2,
+       0,
+       0
+      ],
+      "cabeza": [
+       -4,
+       0,
+       0
+      ]
+     }
+    }
+   ],
+   "osc": [
+    [
+     "brazo_a",
+     0,
+     14,
+     2,
+     0,
+     0
+    ],
+    [
+     "brazo_a",
+     2,
+     6,
+     2,
+     0.25,
+     0
+    ],
+    [
+     "cadera_p",
+     1,
+     0.5,
+     1,
+     0,
+     0
+    ]
+   ]
+  }
+ }
+}

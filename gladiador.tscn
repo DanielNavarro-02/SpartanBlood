@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cqmmukb8mtwtf"]
+
+[ext_resource type="Script" uid="uid://05xu15om4mv" path="res://gladiador.gd" id="1_bto5s"]
+[ext_resource type="Script" uid="uid://ban0k6x4416i6" path="res://rig/rig_segmentado.gd" id="2_e0hwe"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4kxuq"]
+radius = 0.35
+height = 1.75
+
+[node name="Gladiador" type="CharacterBody3D" unique_id=783153844 groups=["enemigos"]]
+axis_lock_linear_z = true
+script = ExtResource("1_bto5s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=232670979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
+shape = SubResource("CapsuleShape3D_4kxuq")
+
+[node name="Rig" type="Node3D" parent="." unique_id=22096797]
+script = ExtResource("2_e0hwe")
+datos = "res://rig/datos/esqueleto.json"

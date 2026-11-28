@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://co0lp4xervh85"]
+
+[ext_resource type="Script" uid="uid://ckrrhjhlj5fvt" path="res://canvas_layer.gd" id="1_1xsix"]
+[ext_resource type="Texture2D" uid="uid://cijmfbm3up03c" path="res://Recursos/vida_llena.png" id="2_rftc2"]
+[ext_resource type="Texture2D" uid="uid://by5vnfmykffyd" path="res://Recursos/vida_vacia.png" id="3_61f8s"]
+[ext_resource type="Texture2D" uid="uid://bcbhxw83svee5" path="res://Recursos/sangre_llena.png" id="4_g10ll"]
+[ext_resource type="Texture2D" uid="uid://cms4iuilqqeh1" path="res://Recursos/sangre_media.png" id="5_gpiub"]
+[ext_resource type="Texture2D" uid="uid://cujelomjr7mbo" path="res://Recursos/sangre_vacia.png" id="6_amv7k"]
+[ext_resource type="Texture2D" uid="uid://chxa1g2u8wjrs" path="res://Recursos/obolo.png" id="7_rftc2"]
+
+[node name="HUD" type="CanvasLayer" unique_id=460007701]
+script = ExtResource("1_1xsix")
+vida_llena = ExtResource("2_rftc2")
+vida_vacia = ExtResource("3_61f8s")
+sangre_llena = ExtResource("4_g10ll")
+sangre_media = ExtResource("5_gpiub")
+sangre_vacia = ExtResource("6_amv7k")
+imagen_obolo = ExtResource("7_rftc2")
+
+[node name="Margen" type="MarginContainer" parent="." unique_id=1855255332]
+offset_right = 121.0
+offset_bottom = 95.0
+
+[node name="Interfaz" type="HBoxContainer" parent="Margen" unique_id=1011148117]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Sangre" type="TextureRect" parent="Margen/Interfaz" unique_id=1673562429]
+layout_mode = 2
+
+[node name="Vida" type="HBoxContainer" parent="Margen/Interfaz" unique_id=1216457895]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 20.0
+theme_override_constants/separation = 4
+
+[node name="Obolos" type="HBoxContainer" parent="Margen/Interfaz" unique_id=1113840950]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Icono" type="TextureRect" parent="Margen/Interfaz/Obolos" unique_id=1947453843]
+layout_mode = 2
+
+[node name="Cantidad" type="Label" parent="Margen/Interfaz/Obolos" unique_id=1238906098]
+layout_mode = 2

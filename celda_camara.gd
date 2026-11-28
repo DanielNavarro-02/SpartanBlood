@@ -1,4 +1,4 @@
-xtends "res://zona_camara.gd"
+extends "res://zona_camara.gd"
 
 
 # Called when the node enters the scene tree for the first time.
