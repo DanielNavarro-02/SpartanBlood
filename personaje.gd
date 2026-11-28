@@ -39,7 +39,7 @@ const ATAQUE_AIRE := {"clip": "ataque_aire", "dur": 0.42, "ini": 0.40, "fin": 0.
 @export var fuerza_empuje_jugador = 5.0  # (compatibilidad)
 @export var tiempo_buffer = 0.22         # cuánto "recuerda" un clic adelantado
 @export var ventana_combo = 0.4          # tiempo tras un golpe para seguir el combo
-@export var slash_scene: PackedScene
+#@export var slash_scene: PackedScene
 @export var dash_scene: PackedScene       # efectos/dash.tscn: estela roja y dorada del dash
 @export var estela: EstelaEspada          # nodo EstelaEspada: cinta blanca (aire) / roja (golpe) que sigue a la espada
 @export var tamano_efectos := 2.5         # qué tan grandes salen los efectos del dash (sube/baja según el tamaño de Kael)

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bi4bnu30rdc5w" path="res://camera_3d.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://7dtiam5f8aie" path="res://mapa.tscn" id="1_lquwl"]
 [ext_resource type="Script" uid="uid://bj0372xnq02wk" path="res://personaje.gd" id="1_pj"]
-[ext_resource type="PackedScene" uid="uid://chym0ujvy5ejg" path="res://slash.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" path="res://efectos/dash.tscn" id="6_2cqfq"]
 [ext_resource type="Script" uid="uid://co2ljkx4a026c" path="res://salud.gd" id="9_kek77"]
 [ext_resource type="Script" uid="uid://cc3dc5dxdvqpr" path="res://efectos/estela_espada.gd" id="9_yaehf"]
@@ -31,6 +30,41 @@ background_mode = 2
 background_energy_multiplier = 1.16
 sky = SubResource("Cielo")
 sky_custom_fov = 42.7
+
+[sub_resource type="Gradient" id="Gradient_40h41"]
+offsets = PackedFloat32Array(0, 0.016129032, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.82258064, 0.82258064, 0.82258064, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mc7g7"]
+gradient = SubResource("Gradient_40h41")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_unmcv"]
+scale_min = 1.8
+scale_max = 2.5
+color_ramp = SubResource("GradientTexture1D_mc7g7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcv7w"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_t52rm"]
+material = SubResource("StandardMaterial3D_tcv7w")
+
+[sub_resource type="PackedScene" id="PackedScene_yaehf"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array()],
+"names": PackedStringArray("slash", "Node3D", "GPUParticles3D", "GPUParticles3D", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "process_material", "draw_pass_1"),
+"node_count": 2,
+"node_ids": PackedInt32Array(1270722952, 1128766767),
+"node_paths": [NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 0, 0, 1073741824, 0, 3, 2, -1, 7, 4, 0, 5, 1, 6, 2, 7, 3, 8, 4, 9, 5, 10, 6, 0),
+"variants": [false, 1, 0.3, true, 1.0, SubResource("ParticleProcessMaterial_unmcv"), SubResource("QuadMesh_t52rm")],
+"version": 3
+}
 
 [sub_resource type="CapsuleShape3D" id="Capsula"]
 radius = 0.35
@@ -75,11 +109,11 @@ margen_zona = 0.75
 fov_zona = 70.0
 
 [node name="Personaje" type="CharacterBody3D" parent="." unique_id=214092241 groups=["jugador"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75.06796, 7.7714653, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.44766, 7.7714653, 0)
 axis_lock_linear_z = true
 script = ExtResource("1_pj")
 rango_ataque_jugador = 2.0
-slash_scene = ExtResource("5_7mycd")
+slash_scene = SubResource("PackedScene_yaehf")
 dash_scene = ExtResource("6_2cqfq")
 
 [node name="Rig" type="Node3D" parent="Personaje" unique_id=1812796129]
@@ -218,7 +252,6 @@ camara = NodePath("../Camera3D")
 reja = NodePath("../Reja")
 salud_jugador = NodePath("../Personaje/Salud")
 puntos_aparicion = NodePath("../PuntosAparicion")
-enemigos_por_oleada = Array[int]([1, 1, 1])
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
 [connection signal="body_exited" from="Area3D" to="Area3D" method="_on_body_exited"]
